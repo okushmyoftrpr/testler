@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fizyoterapi Programı</title>
+
+<!-- BOOTSTRAP -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+
+<!-- MONTSERRAT FONT -->
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+/* ================= THEME ================= */
+:root{
+  --bg:#ffffff;
+  --text:#111111;
+  --nav:#0f172a;
+  --glass:rgba(255,255,255,.7);
+  --title-color:#1a1a1a;
+  --text-color:#333333;
+}
+body.dark{
+  --bg:#0b1220;
+  --text:#f1f5f9;
+  --nav:#020617;
+  --glass:rgba(15,23,42,.7);
+  --title-color:#ffffff;
+  --text-color:#e2e8f0;
+}
+body{
+  background:var(--bg);
+  color:var(--text);
+  transition:background-color 0.4s, color 0.4s;
+  font-family: 'Montserrat', 'Times New Roman', serif;
+}
+
+/* ================= TOPBAR ================= */
+.topbar{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:14px 20px;
+  background:var(--nav);
+  color:white;
+  position:sticky;
+  top:0;
+  z-index:1000;
+  transition:background-color 0.4s;
+}
+.topbar img{
+  width:42px;
+  cursor:pointer;
+}
+.title{
+  position:absolute;
+  left:50%;
+  transform:translateX(-50%);
+  font-weight:600;
+  letter-spacing:1px;
+}
+
+/* ================= MENU ICON ================= */
+.menu-icon{
+  width:32px;
+  cursor:pointer;
+}
+.menu-icon span{
+  display:block;
+  height:3px;
+  background:white;
+  margin:6px 0;
+  transition:0.3s;
+}
+
+/* ================= OVERLAY MENU ================= */
+#modernMenu{
+  position:fixed;
+  inset:0;
+  background:rgba(2,6,23,.92);
+  backdrop-filter:blur(12px);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  transform:translateX(100%);
+  transition:.5s;
+  z-index:2000;
+}
+#modernMenu.active{transform:translateX(0);}
+#modernMenu a{
+  color:white;
+  font-size:26px;
+  margin:12px 0;
+  text-decoration:none;
+  transition:.3s;
+  font-family: 'Montserrat', sans-serif;
+}
+#modernMenu a:hover{
+  letter-spacing:3px;
+  opacity:.7;
+}
+.menu-close{
+  position:absolute;
+  top:20px;
+  right:30px;
+  font-size:32px;
+  color:white;
+  cursor:pointer;
+}
+
+/* ================= PAGE ================= */
+.page{display:none;}
+.page.active{display:block;}
+
+/* ================= IMAGE SIZES ================= */
+.img-home-1{width:360px;height:240px;object-fit:cover;}
+.img-home-2{width:340px;height:220px;object-fit:cover;}
+.img-b1-1,.img-b2-1,.img-b3-1,.img-b4-1,.img-b5-1,.img-b6-1{
+  width:350px;height:230px;object-fit:cover;
+}
+.img-b1-2,.img-b2-2,.img-b3-2,.img-b4-2,.img-b5-2,.img-b6-2{
+  width:330px;height:210px;object-fit:cover;
+}
+
+/* ================= THEME ICON ================= */
+.theme-toggle{
+  text-align:center;
+  margin:20px 0;
+  font-size:22px;
+  cursor:pointer;
+}
+
+/* ================= MODERN SCROLL TOP ================= */
+#scrollTop{
+  position:fixed;
+  right:24px;
+  bottom:90px;
+  width:46px;
+  height:46px;
+  border-radius:50%;
+  background:var(--glass);
+  backdrop-filter:blur(10px);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  opacity:0;
+  pointer-events:none;
+  transition:.4s;
+  box-shadow:0 8px 25px rgba(0,0,0,.15);
+}
+#scrollTop.show{
+  opacity:1;
+  pointer-events:auto;
+}
+#scrollTop i{
+  font-size:20px;
+  color:var(--text);
+}
+#scrollTop:hover{
+  transform:translateY(-4px) scale(1.05);
+}
+
+/* ================= FOOTER ================= */
+footer{
+  background:#020617;
+  color:white;
+  padding:25px 0;
+  transition:background-color 0.4s;
+}
+
+/* ================= METİN VE GÖRSEL DÜZENLEMELERİ ================= */
+/* Başlıklar için kalın font */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700 !important; /* Bold */
+  color: var(--title-color) !important;
+  font-family: 'Montserrat', sans-serif;
+}
+
+/* Normal metinler için normal font */
+p, div, span {
+  font-weight: 400; /* Normal */
+  color: var(--text-color) !important;
+  font-family: 'Montserrat', 'Times New Roman', serif;
+}
+
+/* Metin düzenleme için temel sınıflar */
+.metin-1, .metin-2, .metin-3, .metin-4, .metin-5, .metin-6 {
+  font-family: 'Montserrat', 'Times New Roman', serif;
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--text-color) !important;
+}
+
+/* Resimler için düzenlemeler */
+.resim-1, .resim-2, .resim-3, .resim-4, .resim-5, .resim-6 {
+  object-fit: cover;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  transition: transform 0.3s;
+}
+
+.resim-1:hover, .resim-2:hover, .resim-3:hover, .resim-4:hover, .resim-5:hover, .resim-6:hover {
+  transform: scale(1.02);
+}
+
+/* Yardımcı sınıflar */
+.metin-kalin { font-weight: 700 !important; }
+.metin-italik { font-style: italic; }
+.metin-alt-cizili { text-decoration: underline; }
+.metin-ortala { text-align: center; }
+.metin-saga-dayali { text-align: right; }
+.metin-sola-dayali { text-align: left; }
+
+/* Karanlık modda görsellerin parlaklığını ayarla */
+body.dark .resim-1, 
+body.dark .resim-2, 
+body.dark .resim-3, 
+body.dark .resim-4, 
+body.dark .resim-5, 
+body.dark .resim-6 {
+  filter: brightness(0.9);
+}
+</style>
+</head>
+
+<body>
+
+<!-- ================= TOPBAR ================= -->
+<header class="topbar">
+  <img src="images/logo.png"
+       onclick="goHome()">
+  <div class="title">Sağlık Hizmetleri Meslek Yüksekokulu</div>
+  <div class="menu-icon" onclick="openMenu()">
+    <span></span><span></span><span></span>
+  </div>
+</header>
+
+<!-- ================= MODERN MENU ================= -->
+<div id="modernMenu">
+  <div class="menu-close" onclick="closeMenu()">✕</div>
+  <a onclick="openPage('home')">Ana Sayfa</a>
+  <a onclick="openPage('b1')">Denge Testi</a>
+  <a onclick="openPage('b2')">Stroop Testi</a>
+  <a onclick="openPage('b3')">Refleks Testi</a>
+  <a onclick="openPage('b4')">Pegboard Testi</a>
+  <a onclick="openPage('b5')">Kas Kuvvet Değerlendirme Testi</a>
+  <a onclick="openPage('b6')">Durarak Uzun Atlama Testi</a>
+</div>
+
+<!-- ================= THEME ================= -->
+<div class="theme-toggle">
+  <i class="bi bi-moon-stars" id="themeIcon" onclick="toggleTheme()"></i>
+</div>
+
+<!-- ================= SCROLL TOP ================= -->
+<div id="scrollTop" onclick="scrollTopSmooth()">
+  <i class="bi bi-chevron-up"></i>
+</div>
+
+<!-- ================= HOME ================= -->
+<section id="home" class="page active container py-5">
+<!-- GÖRSEL 1 - METİN 1 -->
+<div class="row align-items-center mb-5">
+  <div class="col-md-6">
+
+    <!-- METİN 1 DÜZENLEME ALANI - BAĞIMSIZ -->
+    <div class="metin-1" style="font-size: 18px; line-height: 1.8;">
+      <h3 style="font-size: 32px; margin-bottom: 15px;">Ana Sayfa Hoş Geldiniz</h3>
+      <p>Bu çalışmada; gözler kapalı tek ayak üzerinde denge testi, stroop testi, durarak uzun atlama testi, kas kuvvet değerlendirmesi, refleks (cetvel düşürme) testi ve pegboard testi uygulanmıştır. Değerlendirmeye 13–18 yaş aralığında bulunan toplam 587 öğrenci dâhil edilmiştir. Altı testten elde edilen toplam veri sayısı 2.968 olarak belirlenmiştir.</p>
+     <!--  <p class="metin-kalin">Kalın yazı örneği: Modern web tasarımı</p>
+      <p class="metin-italik">İtalik yazı örneği: Kullanıcı deneyimi</p>
+      <p class="metin-alt-cizili">Altı çizili yazı örneği: Önemli bilgiler</p> -->
+    </div>
+  </div>
+
+  <div class="col-md-6">
+    <!-- GÖRSEL 1 DÜZENLEME ALANI - BAĞIMSIZ -->
+    <img class="resim-1 img-fluid" style="width: 380px; height: 250px;"
+    src="images/veri.png">
+    <p class="mt-2" style="font-size: 14px; text-align: center; opacity: 0.8;">Görsel 1: Test İstatistikleri</p>
+  </div>
+</div>
+
+<!-- GÖRSEL 2 - METİN 2 -->
+<div class="row align-items-center mb-5">
+  <div class="col-md-6">
+    <!-- GÖRSEL 2 DÜZENLEME ALANI - BAĞIMSIZ -->
+    <img class="resim-2 img-fluid" style="width: 370px; height: 240px;"
+    src="images/game1.jpg">
+    <p class="mt-2" style="font-size: 14px; text-align: center; opacity: 0.8;">Görsel 2: Stroop Testi</p>
+  </div>
+
+  <div class="col-md-6">
+    <!-- METİN 2 DÜZENLEME ALANI - BAĞIMSIZ -->
+    <div class="metin-2" style="font-size: 17px; line-height: 1.7;">
+      <h4 style="font-size: 28px; margin-bottom: 12px;">Fiziksel ve Bilişsel-Motor Performans</h4>
+      <p>Bu çalışmada lise öğrencilerinin denge, dikkat, patlayıcı kuvvet, kas kuvveti, reaksiyon hızı ve ince motor becerileri Alpha test bataryası standartlarına uygun olarak değerlendirilmiştir.</p>
+      <p>Gözler kapalı tek ayak denge testi, Stroop testi, durarak uzun atlama, kas kuvvet değerlendirmesi, cetvel düşürme refleks testi ve pegboard testi uygulanarak öğrencilerin fiziksel ve bilişsel-motor performansları hızlı ve güvenilir şekilde belirlenmiştir.</p>
+    </div>
+  </div>
+</div>
+
+<!-- GÖRSEL 3 - METİN 3 -->
+<div class="row align-items-center">
+  <div class="col-md-6">
+    <!-- METİN 3 DÜZENLEME ALANI - BAĞIMSIZ -->
+    <div class="metin-3" style="font-size: 16px; line-height: 1.9;">
+      <h4 style="font-size: 26px; margin-bottom: 10px;">Motor ve Bilişsel İşlev Ölçümü</h4>
+      <p>Uygulanan testler, öğrencilerin temel motor ve bilişsel işlevlerini kısa sürede ve objektif olarak ölçmeyi amaçlamaktadır.</p>
+      <p>Alpha test yaklaşımına uygun bu batarya, denge, dikkat, kuvvet, reaksiyon ve ince motor koordinasyon alanlarında çok yönlü performans profilinin elde edilmesini sağlamıştır.</p>
+    </div>
+  </div>
+
+  <div class="col-md-6">
+    <!-- GÖRSEL 3 DÜZENLEME ALANI - BAĞIMSIZ -->
+    <img class="resim-3 img-fluid" style="width: 390px; height: 260px;"
+    src="images/peg-anasayfa.jpg">
+    <p class="mt-2" style="font-size: 14px; text-align: center; opacity: 0.8;">Görsel 3: Pegboard Testi</p>
+  </div>
+</div>
+</section>
+
+<!-- ================= BÖLÜM 1 ================= -->
+<section id="b1" class="page container py-5">
+<!-- GÖRSEL 1 - METİN 1 -->
+<div class="row align-items-center mb-5">
+  <div class="col-md-6">
+
+    <!-- METİN 1 - BAĞIMSIZ -->
+    <div class="metin-1" style="font-size: 19px; line-height: 1.7;">
+      <h3 style="font-size: 34px; margin-bottom: 18px;">Bölüm 1: Denge Testi</h3>
+      <h4 style="font-size: 26px; margin-bottom: 18px;">Neden Yapıldı ?</h4>
+
+      <p>Bu test, bireyin tek ayak üzerinde gözleri kapalı durarak denge kontrolünü ölçer. Dengeyi güçlendirmek ve düşme riskini azaltmak için kullanılır. Vücut farkındalığı ve postür kontrolünü geliştirmeye yardımcı olur.</p>
+      <p>Spor performansı ve günlük aktivitelerde güvenliği artırır. Düzenli uygulamalar, denge kaybını önleyebilir.</p>
+      
+    </div>
+  </div>
+  <div class="col-md-6">
+    <!-- GÖRSEL 1 DÜZENLEME ALANI - BAĞIMSIZ -->
+    <img class="resim-1 img-fluid" style="width: 365px; height: 245px;"
+    src="images/denge-1.jpeg">
+    <p class="mt-2" style="font-size: 14px; text-align: center; opacity: 0.8;">Görsel 1: Denge Testi</p>
+  </div>
+</div>
+
+<!-- GÖRSEL 2 - METİN 2 -->
+<div class="row align-items-center mb-5">
+  <div class="col-md-6">
+    <!-- GÖRSEL 2 DÜZENLEME ALANI - BAĞIMSIZ -->
+    <img class="resim-2 img-fluid" style="width: 355px; height: 235px;"
+    src="images/denge-2.jpg">
+    <p class="mt-2" style="font-size: 14px; text-align: center; opacity: 0.8;">Görsel 2: Denge Testi</p>
+  </div>
+
+  <div class="col-md-6">
+    <!-- METİN 2 DÜZENLEME ALANI - BAĞIMSIZ -->
+    <div class="metin-2" style="font-size: 17px; line-height: 1.8;">
+      <h4 style="font-size: 28px; margin-bottom: 14px;">Önemi</h4>
+      <p>Denge yeteneği, hem fiziksel sağlık hem de günlük yaşam aktiviteleri için kritik öneme sahiptir.</p>
+      <p>İyi bir denge, yaralanma riskini azaltır. Sporcuların performansını artırır ve koordinasyonu destekler. Aynı zamanda motor kontrolün genel göstergesidir.</p>
+    </div>
+  </div>
+</div>
+
+<!-- GÖRSEL 3 - METİN 3 -->
+<div class="row align-items-center">
+  <div class="col-md-6">
+    <!-- METİN 3 DÜZENLEME ALANI - BAĞIMSIZ -->
+    <div class="metin-3" style="font-size: 18px; line-height: 1.6;">
+      <h4 style="font-size: 26px; margin-bottom: 12px;">13-18 Yaş Bireylere Yapılma Nedeni</h4>
+      <p>Ergenlik döneminde hızlı büyüme ve vücut oranlarındaki değişiklikler dengeyi etkileyebilir. Bu yaş grubunda denge gelişimini takip etmek önemlidir.</p>
+      <p>Fiziksel aktivitelerde ve sporda güvenli hareket etmelerini sağlar. Ayrıca motor koordinasyon gelişimi için değerli bilgiler verir.</p>
+    </div>
+  </div>
+
+  <div class="col-md-6">
+    <!-- GÖRSEL 3 DÜZENLEME ALANI - BAĞIMSIZ -->
+    <img class="resim-3 img-fluid" style="width: 375px; height: 255px;"
+    src="images/denge-3.jpg">
+    <p class="mt-2" style="font-size: 14px; text-align: center; opacity: 0.8;">Görsel 3: Denge Testi</p>
+  </div>
+</div>
+</section>
+
+<!-- ================= BÖLÜM 2 ================= -->
+<section id="b2" class="page container py-5">
+<!-- GÖRSEL 1 - METİN 1 -->
+<div class="row align-items-center mb-5">
+  <div class="col-md-6">
+    <!-- METİN 1 DÜZENLEME ALANI - BAĞIMSIZ -->
+    <div class="metin-1" style="font-size: 18px; line-height: 1.8;">
+      <h3 style="font-size: 32px; margin-bottom: 16px;">Bölüm 2: Stroop Testi</h3>
+            <h4 style="font-size: 26px; margin-bottom: 18px;">Neden Yapıldı ?</h4>
+
+      <p>Stroop testi, dikkat, bilişsel kontrol ve tepki sürelerini ölçmek için uygulanır. Beynin bilgiyi işleme hızını ve dikkat odaklanmasını değerlendirir. Zihinsel esneklik ve konsantrasyon becerilerini geliştirmeye yardımcı olur.</p>
+      <p>Öğrenme süreçlerinde ve problem çözme yeteneğinde performansı izler. Beyin fonksiyonlarının genel sağlığını kontrol etmek için faydalıdır.</p>
+    </div>
+  </div>
+
+  <div class="col-md-6">
+    <!-- GÖRSEL 1 DÜZENLEME ALANI - BAĞIMSIZ -->
+    <img class="resim-1 img-fluid" style="width: 370px; height: 250px;"
+    src="images/stroop-1.jpg">
+    <p class="mt-2" style="font-size: 14px; text-align: center; opacity: 0.8;">Görsel 1: Stroop Testi</p>
+  </div>
+</div>
+
+<!-- GÖRSEL 2 - METİN 2 -->
+<div class="row align-items-center mb-5">
+  <div class="col-md-6">
+    <!-- GÖRSEL 2 DÜZENLEME ALANI - BAĞIMSIZ -->
+    <img class="resim-2 img-fluid" style="width: 360px; height: 240px;"
+    src="images/stroop-2.jpeg">
+    <p class="mt-2" style="font-size: 14px; text-align: center; opacity: 0.8;">Görsel 2: Stroop Testi</p>
+  </div>
+
+  <div class="col-md-6">
+    <!-- METİN 2 DÜZENLEME ALANI - BAĞIMSIZ -->
+    <div class="metin-2" style="font-size: 17px; line-height: 1.7;">
+      <h4 style="font-size: 28px; margin-bottom: 14px;">Önemi</h4>
+      <p>Dikkat ve bilişsel kontrol, akademik başarı ve günlük yaşam aktiviteleri için önemlidir. Hızlı ve doğru karar verme yeteneğini artırır.</p>
+      <p>Konsantrasyon eksikliği veya bilişsel gecikmeleri tespit etmeye yardımcı olur. Beynin bilgi işleme kapasitesinin göstergesidir.</p>
+    </div>
+  </div>
+</div>
+
+<!-- GÖRSEL 3 - METİN 3 -->
+<div class="row align-items-center">
+  <div class="col-md-6">
+
+    <!-- METİN 3 DÜZENLEME ALANI - BAĞIMSIZ -->
+    <div class="metin-3" style="font-size: 16px; line-height: 1.9;">
+      <h4 style="font-size: 26px; margin-bottom: 12px;">13-18 Yaş Bireylere Yapılma Nedeni</h4>
+      <p>Ergenlikte bilişsel kontrol ve dikkat becerileri hızla gelişir. Bu test, ergenlerin dikkat ve tepki sürelerini izlemek için uygundur.</p>
+      <p>Akademik performans ve spor gibi aktivitelerde dikkati optimize etmeye yardımcı olur. Zihinsel gelişimi takip etmek ve olası bilişsel sorunları erken fark etmek için kullanılır.</p>
+    </div>
+  </div>
+
+  <div class="col-md-6">
+    <!-- GÖRSEL 3 DÜZENLEME ALANI - BAĞIMSIZ -->
+    <img class="resim-3 img-fluid" style="width: 380px; height: 260px;"
+    src="images/stroop-3.png">
+    <p class="mt-2" style="font-size: 14px; text-align: center; opacity: 0.8;">Görsel 3: Stroop Testi</p>
+  </div>
+</div>
+</section>
+
+<!-- ================= BÖLÜM 3 ================= -->
+<section id="b3" class="page container py-5">
+
+<!-- GÖRSEL 1 - METİN 1 -->
+<div class="row align-items-center mb-5">
+  <div class="col-md-6">
+
+    <!-- METİN 1 DÜZENLEME ALANI - BAĞIMSIZ -->
+    <div class="metin-1" style="font-size: 20px; line-height: 1.7;">
+      <h3 style="font-size: 36px; margin-bottom: 20px;">Bölüm 3: Refleks Testi</h3>
+                  <h4 style="font-size: 26px; margin-bottom: 18px;">Neden Yapıldı ?</h4>
+
+      <p>Refleks testi, tepki süresini ve sinir sistemi hızını ölçer. Beynin motor yanıtlarını değerlendirmek için kullanılır.</p>
+      <p>Hızlı refleksler, günlük yaşamda ve sporda güvenliği artırır. Düzenli test, sinir sistemi gelişimini takip etmeye yardımcı olur. Motor kontrol ve koordinasyon ile ilgili bilgi verir.</p>
+    </div>
+  </div>
+
+  <div class="col-md-6">
+    <!-- GÖRSEL 1 DÜZENLEME ALANI - BAĞIMSIZ -->
+    <img class="resim-1 img-fluid" style="width: 375px; height: 255px;"
+    src="images/reaksiyon-1.jpeg">
+    <p class="mt-2" style="font-size: 14px; text-align: center; opacity: 0.8;">Görsel 1: Refleks Testi</p>
+  </div>
+</div>
+
+<!-- GÖRSEL 2 - METİN 2 -->
+<div class="row align-items-center mb-5">
+  <div class="col-md-6">
+    <!-- GÖRSEL 2 DÜZENLEME ALANI - BAĞIMSIZ -->
+    <img class="resim-2 img-fluid" style="width: 365px; height: 245px;"
+    src="images/reaksiyon-2.jpg">
+    <p class="mt-2" style="font-size: 14px; text-align: center; opacity: 0.8;">Görsel 2: Refleks Testi</p>
+  </div>
+
+  <div class="col-md-6">
+    <!-- METİN 2 DÜZENLEME ALANI - BAĞIMSIZ -->
+    <div class="metin-2" style="font-size: 18px; line-height: 1.6;">
+      <h4 style="font-size: 30px; margin-bottom: 16px;">Önemi</h4>
+      <p>Refleks hızı, motor kontrol ve koordinasyonun göstergesidir. Spor ve fiziksel aktivitelerde güvenliği artırır.</p>
+      <p>Tepki süresi yavaşsa, önlem almak mümkündür. Reflekslerin güçlü olması, hızlı hareket ve karar vermeyi sağlar.</p>
+    </div>
+  </div>
+</div>
+
+<!-- GÖRSEL 3 - METİN 3 -->
+<div class="row align-items-center">
+  <div class="col-md-6">
+    <!-- METİN 3 DÜZENLEME ALANI - BAĞIMSIZ -->
+    <div class="metin-3" style="font-size: 19px; line-height: 1.8;">
+      <h4 style="font-size: 28px; margin-bottom: 14px;">13-18 Yaş Bireylere Yapılma Nedeni</h4>
+      <p>Ergenlikte sinir sistemi ve koordinasyon gelişimi devam eder. Bu test, refleks gelişimini izlemek için uygundur. Spor ve fiziksel aktivitelerde performans ve güvenliği optimize eder.</p>
+      <p>Erken yaşta gelişim takibi, uzun vadeli motor yetenekler için faydalıdır.</p>
+    </div>
+  </div>
+
+  <div class="col-md-6">
+    <!-- GÖRSEL 3 DÜZENLEME ALANI - BAĞIMSIZ -->
+    <img class="resim-3 img-fluid" style="width: 385px; height: 265px;"
+    src="images/reaksiyon-3.jpg">
+    <p class="mt-2" style="font-size: 14px; text-align: center; opacity: 0.8;">Görsel 3: Refleks Testi</p>
+  </div>
+</div>
+</section>
+
+<!-- ================= BÖLÜM 4 ================= -->
+<section id="b4" class="page container py-5">
+
+<!-- GÖRSEL 1 - METİN 1 -->
+<div class="row align-items-center mb-5">
+  <div class="col-md-6">
+    <!-- METİN 1 DÜZENLEME ALANI - BAĞIMSIZ -->
+    <div class="metin-1" style="font-size: 21px; line-height: 1.7;">
+      <h3 style="font-size: 38px; margin-bottom: 22px;">Bölüm 4: Pegboard Testi</h3>
+                        <h4 style="font-size: 26px; margin-bottom: 18px;">Neden Yapıldı ?</h4>
+
+      <p>Pegboard testi, el-göz koordinasyonu ve ince motor becerilerini ölçer. Dikkat ve el becerisini geliştirmeye yardımcı olur. El kaslarının kontrolünü ve hızını değerlendirir. Düzenli uygulama, motor beceri gelişimini destekler.</p>
+      <p>Öğrenme ve günlük aktivitelerde beceri kazanımını artırır.</p>
+    </div>
+  </div>
+
+  <div class="col-md-6">
+    <!-- GÖRSEL 1 DÜZENLEME ALANI - BAĞIMSIZ -->
+    <img class="resim-1 img-fluid" style="width: 380px; height: 260px;"
+    src="images/pegboard-1.jpg">
+    <p class="mt-2" style="font-size: 14px; text-align: center; opacity: 0.8;">Görsel 1: Pegboard Testi</p>
+  </div>
+</div>
+
+<!-- GÖRSEL 2 - METİN 2 -->
+<div class="row align-items-center mb-5">
+  <div class="col-md-6">
+    <!-- GÖRSEL 2 DÜZENLEME ALANI - BAĞIMSIZ -->
+    <img class="resim-2 img-fluid" style="width: 370px; height: 250px;"
+    src="images/pegboard-2.jpeg">
+    <p class="mt-2" style="font-size: 14px; text-align: center; opacity: 0.8;">Görsel 2: Pegboard Testi</p>
+  </div>
+
+  <div class="col-md-6">
+    <!-- METİN 2 DÜZENLEME ALANI - BAĞIMSIZ -->
+    <div class="metin-2" style="font-size: 18px; line-height: 1.6;">
+      <h4 style="font-size: 32px; margin-bottom: 18px;">Önemi</h4>
+      <p>İnce motor beceriler, yazı yazma, spor ve günlük işlerde başarı için önemlidir. Koordinasyon ve el becerisi, akademik ve fiziksel performansı etkiler.</p>
+      <p>Pegboard testi, motor gelişimin güvenilir göstergesidir. Hız ve doğruluk becerilerini bir arada değerlendirir.</p>
+    </div>
+  </div>
+</div>
+
+<!-- GÖRSEL 3 - METİN 3 -->
+<div class="row align-items-center">
+  <div class="col-md-6">
+    <!-- METİN 3 DÜZENLEME ALANI - BAĞIMSIZ -->
+    <div class="metin-3" style="font-size: 17px; line-height: 1.8;">
+      <h4 style="font-size: 28px; margin-bottom: 14px;">13-18 Yaş Bireylere Yapılma Nedeni</h4>
+      <p>Ergenlikte ince motor beceriler hala gelişmektedir. Bu test, el-göz koordinasyonu ve beceri gelişimini izlemek için uygundur. Eğitimde ve spor aktivitelerinde performansı artırmak için kullanılır.</p>
+      <p>Motor gelişimdeki eksiklikleri erken fark etmek için faydalıdır.</p>
+    </div>
+  </div>
+
+  <div class="col-md-6">
+    <!-- GÖRSEL 3 DÜZENLEME ALANI - BAĞIMSIZ -->
+    <img class="resim-3 img-fluid" style="width: 390px; height: 270px;"
+    src="images/pegboard-3.jpg">
+    <p class="mt-2" style="font-size: 14px; text-align: center; opacity: 0.8;">Görsel 3: Pegboard Testi</p>
+  </div>
+</div>
+</section>
+
+<!-- ================= BÖLÜM 5 ================= -->
+<section id="b5" class="page container py-5">
+
+<!-- GÖRSEL 1 - METİN 1 -->
+<div class="row align-items-center mb-5">
+  <div class="col-md-6">
+    <!-- METİN 1 DÜZENLEME ALANI - BAĞIMSIZ -->
+    <div class="metin-1" style="font-size: 19px; line-height: 1.7;">
+      <h3 style="font-size: 34px; margin-bottom: 18px;">Bölüm 5: Kas Kuvvet Dğerlendirme Testi</h3>
+            <h4 style="font-size: 26px; margin-bottom: 18px;">Neden Yapıldı ?</h4>
+
+      <p>Kas kuvvet testi, kasların dayanıklılığını ve gücünü ölçmek için yapılır. Fiziksel gelişimi takip etmek ve spor performansını değerlendirmek için faydalıdır. Güçlü kaslar, hareket verimliliğini artırır ve yaralanmaları önler.</p>
+      <p>Test, kas dengesizliklerini belirlemeye yardımcı olur. Düzenli değerlendirme, egzersiz planlamasında rehberlik sağlar.</p>
+    </div>
+  </div>
+
+  <div class="col-md-6">
+    <!-- GÖRSEL 1 DÜZENLEME ALANI - BAĞIMSIZ -->
+    <img class="resim-1 img-fluid" style="width: 375px; height: 255px;"
+    src="images/kuvvet1.jpeg">
+    <p class="mt-2" style="font-size: 14px; text-align: center; opacity: 0.8;">Görsel 1: Kas Kuvvet Değerlendirmesi</p>
+  </div>
+</div>
+
+<!-- GÖRSEL 2 - METİN 2 -->
+<div class="row align-items-center mb-5">
+  <div class="col-md-6">
+    <!-- GÖRSEL 2 DÜZENLEME ALANI - BAĞIMSIZ -->
+    <img class="resim-2 img-fluid" style="width: 365px; height: 245px;"
+    src="images/kuvvet2.jpg">
+    <p class="mt-2" style="font-size: 14px; text-align: center; opacity: 0.8;">Görsel 2: Kas Kuvvet Değerlendirmesi</p>
+  </div>
+
+  <div class="col-md-6">
+    <!-- METİN 2 DÜZENLEME ALANI - BAĞIMSIZ -->
+    <div class="metin-2" style="font-size: 17px; line-height: 1.8;">
+      <h4 style="font-size: 28px; margin-bottom: 14px;">Önemi</h4>
+      <p>Kas kuvveti, günlük aktivitelerde verimlilik ve güvenlik için önemlidir. Spor ve fiziksel aktivitelerde performansı artırır. Kas dengesizlikleri ve zayıflıkları tespit etmek için bir göstergedir.</p>
+      <p>Genel fiziksel sağlık ve esneklik ile doğrudan ilişkilidir.</p>
+    </div>
+  </div>
+</div>
+
+<!-- GÖRSEL 3 - METİN 3 -->
+
+<div class="row align-items-center">
+  <div class="col-md-6">
+    <!-- METİN 3 DÜZENLEME ALANI - BAĞIMSIZ -->
+    <div class="metin-3" style="font-size: 16px; line-height: 1.9;">
+      <h4 style="font-size: 26px; margin-bottom: 12px;">13-18 Yaş Bireylere Yapılma Nedeni</h4>
+      <p>Ergenlikte kas gelişimi hızla değişir ve takip edilmelidir. Kas kuvvetini izlemek, güvenli spor ve fiziksel aktivite için gereklidir. Büyüme dönemindeki kas dengesizliklerini önceden tespit eder.</p>
+      <p>Gelişim sürecine uygun egzersiz planlamasına yardımcı olur.</p>
+    </div>
+  </div>
+
+  <div class="col-md-6">
+    <!-- GÖRSEL 3 DÜZENLEME ALANI - BAĞIMSIZ -->
+    <img class="resim-3 img-fluid" style="width: 385px; height: 265px;"
+    src="images/kuvvet3.jpg">
+    <p class="mt-2" style="font-size: 14px; text-align: center; opacity: 0.8;">Görsel 3: Kas Kuvvet Değerlendirmesi</p>
+  </div>
+</div>
+</section>
+
+<!-- ================= BÖLÜM 6 ================= -->
+<section id="b6" class="page container py-5">
+
+<!-- GÖRSEL 1 - METİN 1 -->
+<div class="row align-items-center mb-5">
+  <div class="col-md-6">
+    <!-- METİN 1 DÜZENLEME ALANI - BAĞIMSIZ -->
+    <div class="metin-1" style="font-size: 20px; line-height: 1.7;">
+      <h3 style="font-size: 36px; margin-bottom: 20px;">Bölüm 6: Durarak Uzun Atlama Testi</h3>
+                  <h4 style="font-size: 26px; margin-bottom: 18px;">Neden Yapıldı ?</h4>
+
+      <p>Durarak uzun atlama testi, bacak kaslarının gücünü ve patlayıcı kuvvetini ölçer. Spor performansını değerlendirmek ve kas gelişimini takip etmek için faydalıdır. Kas koordinasyonunu ve alt ekstremite dayanıklılığını artırır.</p>
+      <p>Düzenli ölçümler, performans gelişimini izlemeyi sağlar. Yaralanmaları önlemeye yardımcı olur.</p>
+    </div>
+  </div>
+
+  <div class="col-md-6">
+    <!-- GÖRSEL 1 DÜZENLEME ALANI - BAĞIMSIZ -->
+    <img class="resim-1 img-fluid" style="width: 380px; height: 260px;"
+    src="images/dua1.jpg">
+    <p class="mt-2" style="font-size: 14px; text-align: center; opacity: 0.8;">Görsel 1: Durarak Uzun Atlama</p>
+  </div>
+</div>
+
+<!-- GÖRSEL 2 - METİN 2 -->
+<div class="row align-items-center mb-5">
+  <div class="col-md-6">
+    <!-- GÖRSEL 2 DÜZENLEME ALANI - BAĞIMSIZ -->
+    <img class="resim-2 img-fluid" style="width: 370px; height: 250px;"
+    src="images/dua2.jpeg">
+    <p class="mt-2" style="font-size: 14px; text-align: center; opacity: 0.8;">Görsel 2:  Durarak Uzun Atlama</p>
+  </div>
+
+  <div class="col-md-6">
+    <!-- METİN 2 DÜZENLEME ALANI - BAĞIMSIZ -->
+    <div class="metin-2" style="font-size: 18px; line-height: 1.6;">
+      <h4 style="font-size: 30px; margin-bottom: 16px;">Önemi</h4>
+      <p>Kas gücü ve patlayıcı kuvvet, fiziksel performans ve hareket verimliliği için önemlidir. Sporcuların atletik yeteneklerini artırır. Kas dengesizliklerini tespit etmeye yardımcı olur.</p>
+      <p>Günlük yaşam aktivitelerinde güç ve hız sağlar.</p>
+    </div>
+  </div>
+</div>
+
+<!-- GÖRSEL 3 - METİN 3 -->
+<div class="row align-items-center">
+  <div class="col-md-6">
+    <!-- METİN 3 DÜZENLEME ALANI - BAĞIMSIZ -->
+    <div class="metin-3" style="font-size: 19px; line-height: 1.8;">
+      <h4 style="font-size: 28px; margin-bottom: 14px;">13-18 Yaş Bireylere Yapılma Nedeni</h4>
+      <p>Ergenlikte kas gelişimi hızlıdır ve koordinasyon değişir. Bu yaş grubunda kuvvet ve patlayıcı güç gelişimini izlemek önemlidir. Fiziksel aktivite ve spor performansı için referans sağlar.</p>
+      <p>Kas dengesizliklerini erken fark etmek, sakatlanma riskini azaltır.</p>
+    </div>
+  </div>
+
+  <div class="col-md-6">
+    <!-- GÖRSEL 3 DÜZENLEME ALANI - BAĞIMSIZ -->
+    <img class="resim-3 img-fluid" style="width: 390px; height: 270px;"
+    src="images/dua3.png">
+    <p class="mt-2" style="font-size: 14px; text-align: center; opacity: 0.8;">Görsel 3:  Durarak Uzun Atlama</p>
+  </div>
+</div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer>
+<div class="container">
+<div class="row align-items-center text-center text-md-start">
+  <div class="col-md-4">
+    <img src="images/logo.png" width="50">
+  </div>
+  <div class="col-md-4 text-center">Fizyoterapi Programı</div>
+   <div class="col-md-4 text-md-end">
+    <a href="https://instagram.com/oku.shmyo" target="_blank" style="color: white; text-decoration: none;">
+      <i class="bi bi-instagram"></i> oku.shmyo
+    </a>
+  </div>
+</div>
+</div>
+</footer>
+
+<!-- ================= JS ================= -->
+<script>
+// Tema kontrolü
+let isDarkMode = localStorage.getItem('darkMode') === 'true';
+
+// Sayfa yüklendiğinde temayı uygula
+function applyTheme() {
+  if (isDarkMode) {
+    document.body.classList.add('dark');
+    document.getElementById('themeIcon').className = 'bi bi-sun';
+  } else {
+    document.body.classList.remove('dark');
+    document.getElementById('themeIcon').className = 'bi bi-moon-stars';
+  }
+}
+
+// Sayfa yüklendiğinde temayı uygula
+document.addEventListener('DOMContentLoaded', applyTheme);
+
+function openMenu(){
+  document.getElementById("modernMenu").classList.add("active");
+}
+function closeMenu(){
+  document.getElementById("modernMenu").classList.remove("active");
+}
+function openPage(id){
+  document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+  document.getElementById(id).classList.add("active");
+  closeMenu();
+  window.scrollTo(0,0);
+}
+function goHome(){
+  openPage('home');
+}
+function toggleTheme(){
+  // Tema değişikliğini anında uygula
+  isDarkMode = !isDarkMode;
+  localStorage.setItem('darkMode', isDarkMode);
+  
+  // Tema sınıfını ekle/çıkar
+  document.body.classList.toggle("dark");
+  
+  // İkonu güncelle
+  const themeIcon = document.getElementById('themeIcon');
+  if (isDarkMode) {
+    themeIcon.className = 'bi bi-sun';
+  } else {
+    themeIcon.className = 'bi bi-moon-stars';
+  }
+}
+window.addEventListener("scroll",()=>{
+  document.getElementById("scrollTop")
+    .classList.toggle("show", window.scrollY>250);
+});
+function scrollTopSmooth(){
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+</script>
+
+</body>
+</html>
