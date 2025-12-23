@@ -60,6 +60,7 @@ body{
   transform:translateX(-50%);
   font-weight:600;
   letter-spacing:1px;
+  color: white !important; /* Bu satırı ekledim - her zaman beyaz */
 }
 
 /* ================= MENU ICON ================= */
@@ -172,6 +173,19 @@ footer{
   transition:background-color 0.4s;
 }
 
+/* Footer'daki tüm metinlerin beyaz olması için */
+footer,
+footer div,
+footer span,
+footer a:not(.instagram-link) {
+  color: white !important;
+}
+
+/* İnstagram linki hariç diğer tüm metinler beyaz */
+footer .text-center {
+  color: white !important;
+}
+
 /* ================= METİN VE GÖRSEL DÜZENLEMELERİ ================= */
 /* Başlıklar için kalın font */
 h1, h2, h3, h4, h5, h6 {
@@ -225,11 +239,7 @@ body.dark .resim-6 {
   filter: brightness(0.9);
 }
 
-/* Karanlık modda footer ve topbar yazı rengini düzeltme */
-.title,
-footer .text-center {
-  color: white !important;
-}
+
 </style>
 </head>
 
