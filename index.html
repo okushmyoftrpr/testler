@@ -199,6 +199,48 @@ footer .text-center {
   color: white !important;
 }
 
+/* ================= KAYNAKÇA LİNK STİLİ ================= */
+.kaynakca-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  background: rgba(59, 130, 246, 0.1);
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  border-radius: 25px;
+  color: var(--text-color);
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  margin-top: 20px;
+  margin-bottom: 30px;
+}
+
+.kaynakca-link:hover {
+  background: rgba(59, 130, 246, 0.2);
+  border-color: rgba(59, 130, 246, 0.5);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.15);
+  color: var(--text-color);
+  text-decoration: none;
+}
+
+.kaynakca-link i {
+  font-size: 16px;
+}
+
+/* Karanlık mod için */
+body.dark .kaynakca-link {
+  background: rgba(59, 130, 246, 0.15);
+  border-color: rgba(59, 130, 246, 0.4);
+}
+
+body.dark .kaynakca-link:hover {
+  background: rgba(59, 130, 246, 0.25);
+  border-color: rgba(59, 130, 246, 0.6);
+}
+
 /* ================= METİN VE GÖRSEL DÜZENLEMELERİ ================= */
 /* Başlıklar için kalın font */
 h1, h2, h3, h4, h5, h6 {
@@ -252,6 +294,38 @@ body.dark .resim-6 {
   filter: brightness(0.9);
 }
 
+/* Tema uyumlu özel çizgi - Karanlık/Aydınlık Mod için */
+.custom-line {
+  height: 1px;
+  background-color: #000000; /* Aydınlık mod için siyah */
+  border: none;
+  width: 100%;
+  transition: background-color 0.4s;
+}
+
+/* Karanlık mod için beyaz çizgi */
+body.dark .custom-line {
+  background-color: #ffffff; /* Karanlık mod için beyaz */
+}
+
+/* Opacity ayarı için opsiyonel - daha yumuşak görünüm istersen */
+.custom-line.soft {
+  opacity: 0.3;
+}
+
+body.dark .custom-line.soft {
+  opacity: 0.2;
+}
+
+/* Kalın çizgi seçeneği */
+.custom-line.bold {
+  height: 2px;
+}
+
+/* Daha kalın çizgi */
+.custom-line.thick {
+  height: 3px;
+}
 
 </style>
 </head>
@@ -280,6 +354,7 @@ body.dark .resim-6 {
   <a onclick="openPage('b4')">Pegboard Testi</a>
   <a onclick="openPage('b5')">Kas Kuvvet Değerlendirme Testi</a>
   <a onclick="openPage('b6')">Durarak Uzun Atlama Testi</a>
+  <a onclick="openPage('kaynakca')">Kaynakça</a>
 </div>
 
 <!-- ================= THEME ================= -->
@@ -302,9 +377,6 @@ body.dark .resim-6 {
     <div class="metin-1" style="font-size: 18px; line-height: 1.8;">
       <h3 style="font-size: 32px; margin-bottom: 15px;">Ana Sayfa Hoş Geldiniz</h3>
       <p>Bu çalışmada; gözler kapalı tek ayak üzerinde denge testi, stroop testi, durarak uzun atlama testi, kas kuvvet değerlendirmesi, refleks (cetvel düşürme) testi ve pegboard testi uygulanmıştır. Değerlendirmeye 13–18 yaş aralığında bulunan toplam 587 öğrenci dâhil edilmiştir. Altı testten elde edilen toplam veri sayısı 2.968 olarak belirlenmiştir.</p>
-     <!--  <p class="metin-kalin">Kalın yazı örneği: Modern web tasarımı</p>
-      <p class="metin-italik">İtalik yazı örneği: Kullanıcı deneyimi</p>
-      <p class="metin-alt-cizili">Altı çizili yazı örneği: Önemli bilgiler</p> -->
     </div>
   </div>
 
@@ -352,6 +424,13 @@ body.dark .resim-6 {
     src="images/peg-anasayfa.jpg">
     <p class="mt-2" style="font-size: 14px; text-align: center; opacity: 0.8;">Görsel 3: Pegboard Testi</p>
   </div>
+</div>
+
+<!-- KAYNAKÇA LİNKİ -->
+<div class="text-center mt-5">
+  <a href="javascript:void(0);" onclick="openPage('kaynakca')" class="kaynakca-link">
+    <i class="bi bi-journal-text"></i> Kaynakça için tıklayın
+  </a>
 </div>
 </section>
 
@@ -416,6 +495,13 @@ body.dark .resim-6 {
     <p class="mt-2" style="font-size: 14px; text-align: center; opacity: 0.8;">Görsel 3: Denge Testi</p>
   </div>
 </div>
+
+<!-- KAYNAKÇA LİNKİ -->
+<div class="text-center mt-5">
+  <a href="javascript:void(0);" onclick="openPage('kaynakca')" class="kaynakca-link">
+    <i class="bi bi-journal-text"></i> Kaynakça için tıklayın
+  </a>
+</div>
 </section>
 
 <!-- ================= BÖLÜM 2 ================= -->
@@ -478,6 +564,13 @@ body.dark .resim-6 {
     src="images/stroop-3.png">
     <p class="mt-2" style="font-size: 14px; text-align: center; opacity: 0.8;">Görsel 3: Stroop Testi</p>
   </div>
+</div>
+
+<!-- KAYNAKÇA LİNKİ -->
+<div class="text-center mt-5">
+  <a href="javascript:void(0);" onclick="openPage('kaynakca')" class="kaynakca-link">
+    <i class="bi bi-journal-text"></i> Kaynakça için tıklayın
+  </a>
 </div>
 </section>
 
@@ -543,6 +636,13 @@ body.dark .resim-6 {
     <p class="mt-2" style="font-size: 14px; text-align: center; opacity: 0.8;">Görsel 3: Refleks Testi</p>
   </div>
 </div>
+
+<!-- KAYNAKÇA LİNKİ -->
+<div class="text-center mt-5">
+  <a href="javascript:void(0);" onclick="openPage('kaynakca')" class="kaynakca-link">
+    <i class="bi bi-journal-text"></i> Kaynakça için tıklayın
+  </a>
+</div>
 </section>
 
 <!-- ================= BÖLÜM 4 ================= -->
@@ -606,6 +706,13 @@ body.dark .resim-6 {
     <p class="mt-2" style="font-size: 14px; text-align: center; opacity: 0.8;">Görsel 3: Pegboard Testi</p>
   </div>
 </div>
+
+<!-- KAYNAKÇA LİNKİ -->
+<div class="text-center mt-5">
+  <a href="javascript:void(0);" onclick="openPage('kaynakca')" class="kaynakca-link">
+    <i class="bi bi-journal-text"></i> Kaynakça için tıklayın
+  </a>
+</div>
 </section>
 
 <!-- ================= BÖLÜM 5 ================= -->
@@ -616,7 +723,7 @@ body.dark .resim-6 {
   <div class="col-md-6">
     <!-- METİN 1 DÜZENLEME ALANI - BAĞIMSIZ -->
     <div class="metin-1" style="font-size: 19px; line-height: 1.7;">
-      <h3 style="font-size: 34px; margin-bottom: 18px;">Bölüm 5: Kas Kuvvet Dğerlendirme Testi</h3>
+      <h3 style="font-size: 34px; margin-bottom: 18px;">Bölüm 5: Kas Kuvvet Değerlendirme Testi</h3>
             <h4 style="font-size: 26px; margin-bottom: 18px;">Neden Yapıldı ?</h4>
 
       <p>Kas kuvvet testi, kasların dayanıklılığını ve gücünü ölçmek için yapılır. Fiziksel gelişimi takip etmek ve spor performansını değerlendirmek için faydalıdır. Güçlü kaslar, hareket verimliliğini artırır ve yaralanmaları önler.</p>
@@ -669,6 +776,13 @@ body.dark .resim-6 {
     src="images/kuvvet3.jpg">
     <p class="mt-2" style="font-size: 14px; text-align: center; opacity: 0.8;">Görsel 3: Kas Kuvvet Değerlendirmesi</p>
   </div>
+</div>
+
+<!-- KAYNAKÇA LİNKİ -->
+<div class="text-center mt-5">
+  <a href="javascript:void(0);" onclick="openPage('kaynakca')" class="kaynakca-link">
+    <i class="bi bi-journal-text"></i> Kaynakça için tıklayın
+  </a>
 </div>
 </section>
 
@@ -731,6 +845,410 @@ body.dark .resim-6 {
     <img class="resim-3 img-fluid" style="width: 390px; height: 270px;"
     src="images/dua3.png">
     <p class="mt-2" style="font-size: 14px; text-align: center; opacity: 0.8;">Görsel 3:  Durarak Uzun Atlama</p>
+  </div>
+</div>
+
+<!-- KAYNAKÇA LİNKİ -->
+<div class="text-center mt-5">
+  <a href="javascript:void(0);" onclick="openPage('kaynakca')" class="kaynakca-link">
+    <i class="bi bi-journal-text"></i> Kaynakça için tıklayın
+  </a>
+</div>
+</section>
+
+<!-- ================= KAYNAKÇA ================= -->
+<section id="kaynakca" class="page container py-5">
+<div class="row">
+  <div class="col-12">
+    <div class="metin-1" style="font-size: 18px; line-height: 1.8;">
+      <h3 style="font-size: 36px; margin-bottom: 30px; text-align: center;">Kaynakça</h3>
+      
+      <!-- Ana Sayfa Başlangıç -->
+
+      <h4 style="font-size: 24px; margin-bottom: 20px; color: var(--title-color);">Ana Sayfada Kullanılan Metinler</h4>
+      <br>
+
+       <h4 style="font-size: 20px; margin-bottom: 20px; color: var(--title-color);">Fiziksel ve Bilişsel-Motor Performans</h4>
+    <br>
+
+      <ul style="list-style-type: none; padding-left: 0;">
+        <li style="margin-bottom: 15px; padding-left: 20px; position: relative;">
+          <i class="bi bi-file-earmark-text" style="position: absolute; left: 0; color: var(--text-color);"></i>
+          Council of Europe. (1988). Eurofit: Handbook for the Eurofit Tests of Physical Fitness. Strasbourg: Council of Europe.
+        </li>
+
+        <li style="margin-bottom: 15px; padding-left: 20px; position: relative;">
+          <i class="bi bi-file-earmark-text" style="position: absolute; left: 0; color: var(--text-color);"></i>
+          Stroop, J. R. (1935). Studies of interference in serial verbal reactions. Journal of Experimental Psychology, 18(6), 643–662.
+        </li>
+
+        <li style="margin-bottom: 15px; padding-left: 20px; position: relative;">
+          <i class="bi bi-file-earmark-text" style="position: absolute; left: 0; color: var(--text-color);"></i>
+          Magill, R. A., & Anderson, D. I. (2017). Motor Learning and Control: Concepts and Applications. New York: McGraw-Hill Education.
+        </li>
+
+<br>
+        <h4 style="font-size: 20px; margin-bottom: 20px; color: var(--title-color);">Motor ve Bilişsel İşlev Ölçümü </h4>
+    <br>
+
+
+        <li style="margin-bottom: 15px; padding-left: 20px; position: relative;">
+          <i class="bi bi-file-earmark-text" style="position: absolute; left: 0; color: var(--text-color);"></i>
+          Johnson, B. L., & Nelson, J. K. (1986). Practical Measurements for Evaluation in Physical Education. Champaign, IL: Human Kinetics.
+        </li>
+
+        <li style="margin-bottom: 15px; padding-left: 20px; position: relative;">
+          <i class="bi bi-file-earmark-text" style="position: absolute; left: 0; color: var(--text-color);"></i>
+          Schmidt, R. A., & Lee, T. D. (2019). Motor Control and Learning: A Behavioral Emphasis. Champaign, IL: Human Kinetics.
+        </li>
+
+        <li style="margin-bottom: 15px; padding-left: 20px; position: relative;">
+          <i class="bi bi-file-earmark-text" style="position: absolute; left: 0; color: var(--text-color);"></i>
+          Fleishman, E. A., & Quaintance, M. K. (1984). Taxonomies of Human Performance. Orlando, FL: Academic Press.
+        </li>
+
+        <br>
+
+              <!-- Ana Sayfa Görsel Başlangıç -->
+
+         <h4 style="font-size: 24px; margin-bottom: 20px; color: var(--title-color);">Ana Sayfada Kullanılan Görseller</h4>
+    <br>
+
+        <li style="margin-bottom: 15px; padding-left: 20px; position: relative;">
+            <p>1. Görsel</p>
+          <i class="bi bi-images" style="position: absolute; left: 0; color: var(--text-color);"></i>
+ChatGPT (https://chatgpt.com) kullanılarak oluşturulmuştur.
+        </li>
+
+        <li style="margin-bottom: 15px; padding-left: 20px; position: relative;">
+            <p>2. Görsel</p>
+          <i class="bi bi-images" style="position: absolute; left: 0; color: var(--text-color);"></i>
+https://sinirbilim.org/stroop-etkisi-testi/
+        </li>
+
+        <li style="margin-bottom: 15px; padding-left: 20px; position: relative;">
+            <p>3. Görsel</p>
+          <i class="bi bi-images" style="position: absolute; left: 0; color: var(--text-color);"></i>
+https://www.youtube.com/watch?v=7P35pkIDyK4 - Videodan alınmıştır.
+        </li>
+
+            <!-- Ana Sayfa Görsel Bitiş -->
+      </ul>
+
+      <div class="custom-line my-4"></div>
+
+<!-- Ana Sayfa Bitiş -->
+
+<!-- Denge Başlangıç -->
+
+<h4 style="font-size: 24px; margin-bottom: 20px; color: var(--title-color);">Denge Testinde Kullanılan Metinler</h4>
+     
+    <br>
+
+      <ul style="list-style-type: none; padding-left: 0;">
+        <li style="margin-bottom: 15px; padding-left: 20px; position: relative;">
+          <i class="bi bi-file-earmark-text" style="position: absolute; left: 0; color: var(--text-color);"></i>
+          Shumway-Cook, A., & Woollacott, M. H. (2017). Motor Control: Translating Research into Clinical Practice. Wolters Kluwer.
+        </li>
+
+        <li style="margin-bottom: 15px; padding-left: 20px; position: relative;">
+          <i class="bi bi-file-earmark-text" style="position: absolute; left: 0; color: var(--text-color);"></i>
+          McGuine, T. A., et al. (2000). Balance as a predictor of ankle injuries in high school basketball players. Clinical Journal of Sport Medicine, 10(4), 239–244.
+        </li>
+
+        <li style="margin-bottom: 15px; padding-left: 20px; position: relative;">
+          <i class="bi bi-file-earmark-text" style="position: absolute; left: 0; color: var(--text-color);"></i>
+          Winter, D. A. (2009). Biomechanics and Motor Control of Human Movement. Wiley.
+        </li>
+
+         <!-- Denge Görsel Başlangıç -->
+<br>
+         <h4 style="font-size: 24px; margin-bottom: 20px; color: var(--title-color);">Denge Testinde Kullanılan Görseller</h4>
+    <br>
+
+        <li style="margin-bottom: 15px; padding-left: 20px; position: relative;">
+            <p>1. Görsel</p>
+          <i class="bi bi-images" style="position: absolute; left: 0; color: var(--text-color);"></i>
+https://www.ntv.com.tr/galeri/n-life/saglikli-yasam/abdli-arastirmacilar-acikladi-tek-ayak-uzerinde-durmak-biyolojik-yasinizi-ortaya-cikariyor,don2r_NwQkq1SZNme-FrbA
+        </li>
+
+        <li style="margin-bottom: 15px; padding-left: 20px; position: relative;">
+            <p>2. Görsel</p>
+          <i class="bi bi-images" style="position: absolute; left: 0; color: var(--text-color);"></i>
+https://www.diyetisyendunyasi.com/10-saniye-denge-testi-ciddi-sorunlarin-habercisi-olabilir
+        </li>
+
+        <li style="margin-bottom: 15px; padding-left: 20px; position: relative;">
+            <p>3. Görsel</p>
+          <i class="bi bi-images" style="position: absolute; left: 0; color: var(--text-color);"></i>
+https://www.vanillakismis.my/gagal-berdiri-sebelah-kaki-hingga-20-saat-petanda-anda-berisiko-kena-serangan-strok-tua-nanti2/
+        </li>
+
+            <!-- Denge Görsel Bitiş -->
+      <div class="custom-line my-4"></div>
+
+
+<!-- Denge Bitiş -->
+
+<!-- Stroop Testi Başlangıç -->
+
+<h4 style="font-size: 24px; margin-bottom: 20px; color: var(--title-color);">Stroop Testinde Kullanılan Metinler</h4>
+     
+    <br>
+
+      <ul style="list-style-type: none; padding-left: 0;">
+        <li style="margin-bottom: 15px; padding-left: 20px; position: relative;">
+          <i class="bi bi-file-earmark-text" style="position: absolute; left: 0; color: var(--text-color);"></i>
+          Stroop, J. R. (1935). Studies of interference in serial verbal reactions. Journal of Experimental Psychology, 18(6), 643–662.
+        </li>
+
+        <li style="margin-bottom: 15px; padding-left: 20px; position: relative;">
+          <i class="bi bi-file-earmark-text" style="position: absolute; left: 0; color: var(--text-color);"></i>
+          Lezak, M. D., et al. (2012). Neuropsychological Assessment. Oxford University Press.
+        </li>
+
+        <li style="margin-bottom: 15px; padding-left: 20px; position: relative;">
+          <i class="bi bi-file-earmark-text" style="position: absolute; left: 0; color: var(--text-color);"></i>
+          Diamond, A. (2013). Executive functions. Annual Review of Psychology, 64, 135–168.
+        </li>
+
+         <!-- Stroop Görsel Başlangıç -->
+<br>
+         <h4 style="font-size: 24px; margin-bottom: 20px; color: var(--title-color);">Stroop Testinde Kullanılan Görseller</h4>
+    <br>
+
+        <li style="margin-bottom: 15px; padding-left: 20px; position: relative;">
+            <p>1. Görsel</p>
+          <i class="bi bi-images" style="position: absolute; left: 0; color: var(--text-color);"></i>
+https://urunluilkokulu.meb.k12.tr/icerikler/rengi-bul-kelimeye-aldanma_16138062.html
+        </li>
+
+        <li style="margin-bottom: 15px; padding-left: 20px; position: relative;">
+            <p>2. Görsel</p>
+          <i class="bi bi-images" style="position: absolute; left: 0; color: var(--text-color);"></i>
+https://www.instagram.com/p/CabxM74L5at/
+        </li>
+
+        <li style="margin-bottom: 15px; padding-left: 20px; position: relative;">
+            <p>3. Görsel</p>
+          <i class="bi bi-images" style="position: absolute; left: 0; color: var(--text-color);"></i>
+https://www.besteuysal.com/stroop-etkisi-renkler-ve-yazilar-uyusmazsa/
+        </li>
+
+            <!-- Stroop Görsel Bitiş -->
+      <div class="custom-line my-4"></div>
+
+<!-- Stroop Testi Bitiş -->
+
+    <!-- Refleks Testi Başlangıç -->
+
+<h4 style="font-size: 24px; margin-bottom: 20px; color: var(--title-color);">Refleks Testinde Kullanılan Metinler</h4>
+     
+    <br>
+
+      <ul style="list-style-type: none; padding-left: 0;">
+        <li style="margin-bottom: 15px; padding-left: 20px; position: relative;">
+          <i class="bi bi-file-earmark-text" style="position: absolute; left: 0; color: var(--text-color);"></i>
+          Schmidt, R. A., & Lee, T. D. (2019). Motor Learning and Performance. Human Kinetics.
+        </li>
+
+        <li style="margin-bottom: 15px; padding-left: 20px; position: relative;">
+          <i class="bi bi-file-earmark-text" style="position: absolute; left: 0; color: var(--text-color);"></i>
+          Davis, J. L., et al. (2014). Simple reaction time testing. Journal of Strength and Conditioning Research, 28(1), 1–6.
+        </li>
+
+        <li style="margin-bottom: 15px; padding-left: 20px; position: relative;">
+          <i class="bi bi-file-earmark-text" style="position: absolute; left: 0; color: var(--text-color);"></i>
+          Diamond, A. (2013). Executive functions. Annual Review of Psychology, 64, 135–168.
+        </li>
+
+        <!-- Refleks Görsel Başlangıç -->
+<br>
+         <h4 style="font-size: 24px; margin-bottom: 20px; color: var(--title-color);">Refleks Testinde Kullanılan Görseller</h4>
+    <br>
+
+        <li style="margin-bottom: 15px; padding-left: 20px; position: relative;">
+            <p>1. Görsel</p>
+          <i class="bi bi-images" style="position: absolute; left: 0; color: var(--text-color);"></i>
+https://share.google/images/K1eMEr2iDsSP9ch7r 
+        </li>
+
+        <li style="margin-bottom: 15px; padding-left: 20px; position: relative;">
+            <p>2. Görsel</p>
+          <i class="bi bi-images" style="position: absolute; left: 0; color: var(--text-color);"></i>
+https://x.com/VanerAlper/status/1265278489080389632
+        </li>
+
+        <li style="margin-bottom: 15px; padding-left: 20px; position: relative;">
+            <p>3. Görsel</p>
+          <i class="bi bi-images" style="position: absolute; left: 0; color: var(--text-color);"></i>
+https://x.com/VanerAlper/status/1265278489080389632
+        </li>
+
+            <!-- Refleks Görsel Bitiş -->
+
+      <div class="custom-line my-4"></div>
+
+<!-- Refleks Testi Bitiş -->  
+ 
+   <!-- Pegboard Testi Başlangıç -->
+
+<h4 style="font-size: 24px; margin-bottom: 20px; color: var(--title-color);">Pegboard Testinde Kullanılan Metinler</h4>
+     
+    <br>
+
+      <ul style="list-style-type: none; padding-left: 0;">
+        <li style="margin-bottom: 15px; padding-left: 20px; position: relative;">
+          <i class="bi bi-file-earmark-text" style="position: absolute; left: 0; color: var(--text-color);"></i>
+Tiffin, J., & Asher, E. J. (1948). The Purdue Pegboard: Norms and studies of reliability. Journal of Applied Psychology, 32(3), 234–247.
+        </li>
+
+        <li style="margin-bottom: 15px; padding-left: 20px; position: relative;">
+          <i class="bi bi-file-earmark-text" style="position: absolute; left: 0; color: var(--text-color);"></i>
+Mathiowetz, V., et al. (1985). Adult norms for the Purdue Pegboard Test. American Journal of Occupational Therapy, 39(1), 24–29.
+        </li>
+
+        <li style="margin-bottom: 15px; padding-left: 20px; position: relative;">
+          <i class="bi bi-file-earmark-text" style="position: absolute; left: 0; color: var(--text-color);"></i>
+Lezak, M. D., et al. (2012). Neuropsychological Assessment. Oxford University Press.
+        </li>
+
+        <!-- Pegboard Görsel Başlangıç -->
+<br>
+         <h4 style="font-size: 24px; margin-bottom: 20px; color: var(--title-color);">Pegboard Testinde Kullanılan Görseller</h4>
+    <br>
+
+        <li style="margin-bottom: 15px; padding-left: 20px; position: relative;">
+            <p>1. Görsel</p>
+          <i class="bi bi-images" style="position: absolute; left: 0; color: var(--text-color);"></i>
+https://medicalquip.com/product/purdue-pegboard-test/
+        </li>
+
+        <li style="margin-bottom: 15px; padding-left: 20px; position: relative;">
+            <p>2. Görsel</p>
+          <i class="bi bi-images" style="position: absolute; left: 0; color: var(--text-color);"></i>
+https://www.opchealth.com.au/purdue-peg-board
+        </li>
+
+        <li style="margin-bottom: 15px; padding-left: 20px; position: relative;">
+            <p>3. Görsel</p>
+          <i class="bi bi-images" style="position: absolute; left: 0; color: var(--text-color);"></i>
+https://mbi.ufl.edu/2023/06/05/pegboard-test-assessing-movement-could-aid-parkinsons-research-study-shows/
+        </li>
+
+            <!-- Pegboard Görsel Bitiş -->
+
+<div class="custom-line my-4"></div>
+
+<!-- Pegboard Testi Bitiş --> 
+
+<!-- Kas Kuvvet Değerlendirme Testi Başlangıç -->
+
+<h4 style="font-size: 24px; margin-bottom: 20px; color: var(--title-color);">Kas Kuvvet Değerlendirme Testinde Kullanılan Metinler</h4>
+     
+    <br>
+
+      <ul style="list-style-type: none; padding-left: 0;">
+        <li style="margin-bottom: 15px; padding-left: 20px; position: relative;">
+          <i class="bi bi-file-earmark-text" style="position: absolute; left: 0; color: var(--text-color);"></i>
+Kendall, F. P., et al. (2005). Muscles: Testing and Function. Lippincott Williams & Wilkins.
+        </li>
+
+        <li style="margin-bottom: 15px; padding-left: 20px; position: relative;">
+          <i class="bi bi-file-earmark-text" style="position: absolute; left: 0; color: var(--text-color);"></i>
+Kisner, C., & Colby, L. (2017). Therapeutic Exercise: Foundations and Techniques. F.A. Davis.
+        </li>
+
+        <li style="margin-bottom: 15px; padding-left: 20px; position: relative;">
+          <i class="bi bi-file-earmark-text" style="position: absolute; left: 0; color: var(--text-color);"></i>
+American College of Sports Medicine (ACSM). (2021). ACSM’s Guidelines for Exercise Testing and Prescription.
+        </li>
+
+        <!-- Kas Kuvvet Değerlendirme Görsel Başlangıç -->
+<br>
+         <h4 style="font-size: 24px; margin-bottom: 20px; color: var(--title-color);">Kas Kuvvet Değerlendirme Testinde Kullanılan Görseller</h4>
+    <br>
+
+        <li style="margin-bottom: 15px; padding-left: 20px; position: relative;">
+            <p>1. Görsel</p>
+          <i class="bi bi-images" style="position: absolute; left: 0; color: var(--text-color);"></i>
+https://metinergun.com/services/kas-kuvvet-testleri/
+        </li>
+
+        <li style="margin-bottom: 15px; padding-left: 20px; position: relative;">
+            <p>2. Görsel</p>
+          <i class="bi bi-images" style="position: absolute; left: 0; color: var(--text-color);"></i>
+https://www.hepsiburada.com/silhouette-396lbs-180kg-dijital-el-dinamometresi-yurt-disindan-pm-HBC00005HWEIY
+        </li>
+
+        <li style="margin-bottom: 15px; padding-left: 20px; position: relative;">
+            <p>3. Görsel</p>
+          <i class="bi bi-images" style="position: absolute; left: 0; color: var(--text-color);"></i>
+https://depositphotos.com/tr/photo/using-hand-dynamometer-grip-strength-test-659487738.html
+        </li>
+
+            <!-- Kas Kuvvet Değerlendirme Görsel Bitiş -->
+
+<div class="custom-line my-4"></div>
+
+<!-- Kas Kuvvet Değerlendirme Testi Bitiş -->
+
+<!-- Durarak Uzun Atlama Testi Başlangıç -->
+
+<h4 style="font-size: 24px; margin-bottom: 20px; color: var(--title-color);">Durarak Uzun Atlama Testinde Kullanılan Metinler</h4>
+     
+    <br>
+
+      <ul style="list-style-type: none; padding-left: 0;">
+        <li style="margin-bottom: 15px; padding-left: 20px; position: relative;">
+          <i class="bi bi-file-earmark-text" style="position: absolute; left: 0; color: var(--text-color);"></i>
+EUROFIT. (1988). Handbook for the EUROFIT Tests of Physical Fitness. Council of Europe.
+        </li>
+
+        <li style="margin-bottom: 15px; padding-left: 20px; position: relative;">
+          <i class="bi bi-file-earmark-text" style="position: absolute; left: 0; color: var(--text-color);"></i>
+Heyward, V. H. (2010). Advanced Fitness Assessment and Exercise Prescription. Human Kinetics.
+        </li>
+
+        <li style="margin-bottom: 15px; padding-left: 20px; position: relative;">
+          <i class="bi bi-file-earmark-text" style="position: absolute; left: 0; color: var(--text-color);"></i>
+Castro-Piñero, J., et al. (2010). Criterion-related validity of field-based fitness tests in youth. British Journal of Sports Medicine, 44(13), 934–943.
+        </li>
+
+         <!-- Durarak Uzun Atlama Görsel Başlangıç -->
+<br>
+         <h4 style="font-size: 24px; margin-bottom: 20px; color: var(--title-color);">Durarak Uzun Atlama Testinde Kullanılan Görseller</h4>
+    <br>
+
+        <li style="margin-bottom: 15px; padding-left: 20px; position: relative;">
+            <p>1. Görsel</p>
+          <i class="bi bi-images" style="position: absolute; left: 0; color: var(--text-color);"></i>
+https://www.youtube.com/watch?v=Jtuw6OQ1dx8 - Videodan alınmıştır.
+        </li>
+
+        <li style="margin-bottom: 15px; padding-left: 20px; position: relative;">
+            <p>2. Görsel</p>
+          <i class="bi bi-images" style="position: absolute; left: 0; color: var(--text-color);"></i>
+https://www.tac.k12.tr/en/haber/50/physical-education-class-starts-with-physical-fitness-measurements--/
+        </li>
+
+        <li style="margin-bottom: 15px; padding-left: 20px; position: relative;">
+            <p>3. Görsel</p>
+          <i class="bi bi-images" style="position: absolute; left: 0; color: var(--text-color);"></i>
+http://www.kidssportsacademy.com/?pnum=19&pt=Durarak+Uzun+Atlama+Testi
+        </li>
+
+            <!-- Durarak Uzun Atlama Görsel Bitiş -->
+
+            <div class="custom-line my-4"></div>
+
+<!-- Durarak Uzun Atlama Testi Bitiş -->
+      
+      <div class="alert alert-info mt-5" style="background-color: rgba(59, 130, 246, 0.1); border-color: rgba(59, 130, 246, 0.3); color: var(--text-color);">
+        <i class="bi bi-info-circle me-2"></i>
+        Bu kaynakça listesi, çalışmada kullanılan test metinleri ve görselleri hakkında temel referansları içermektedir. Kaynaklar güncellenebilir ve genişletilebilir.
+      </div>
+    </div>
   </div>
 </div>
 </section>
