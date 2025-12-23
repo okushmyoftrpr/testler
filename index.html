@@ -35,6 +35,7 @@ body{
   color:var(--text);
   transition:background-color 0.4s, color 0.4s;
   font-family: 'Montserrat', 'Times New Roman', serif;
+  overflow-x: hidden;
 }
 
 /* ================= TOPBAR ================= */
@@ -42,7 +43,7 @@ body{
   display:flex;
   align-items:center;
   justify-content:space-between;
-  padding:14px 20px;
+  padding:14px 15px;
   background:var(--nav);
   color:white;
   position:sticky;
@@ -53,12 +54,15 @@ body{
 .topbar img{
   width:42px;
   cursor:pointer;
+  flex-shrink: 0;
 }
 .title-container {
   position:absolute;
   left:50%;
   transform:translateX(-50%);
   text-align: center;
+  width: 60%;
+  max-width: 400px;
 }
 .title-main{
   font-weight:600;
@@ -80,6 +84,7 @@ body{
 .menu-icon{
   width:32px;
   cursor:pointer;
+  flex-shrink: 0;
 }
 .menu-icon span{
   display:block;
@@ -111,6 +116,8 @@ body{
   text-decoration:none;
   transition:.3s;
   font-family: 'Montserrat', sans-serif;
+  text-align: center;
+  padding: 5px 15px;
 }
 #modernMenu a:hover{
   letter-spacing:3px;
@@ -127,16 +134,27 @@ body{
 
 /* ================= PAGE ================= */
 .page{display:none;}
-.page.active{display:block;}
+.page.active{
+  display:block;
+  animation: fadeIn 0.5s ease;
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
 
 /* ================= IMAGE SIZES ================= */
-.img-home-1{width:360px;height:240px;object-fit:cover;}
-.img-home-2{width:340px;height:220px;object-fit:cover;}
-.img-b1-1,.img-b2-1,.img-b3-1,.img-b4-1,.img-b5-1,.img-b6-1{
-  width:350px;height:230px;object-fit:cover;
-}
-.img-b1-2,.img-b2-2,.img-b3-2,.img-b4-2,.img-b5-2,.img-b6-2{
-  width:330px;height:210px;object-fit:cover;
+.img-home-1, .img-home-2, .img-home-3,
+.img-b1-1, .img-b1-2, .img-b1-3,
+.img-b2-1, .img-b2-2, .img-b2-3,
+.img-b3-1, .img-b3-2, .img-b3-3,
+.img-b4-1, .img-b4-2, .img-b4-3,
+.img-b5-1, .img-b5-2, .img-b5-3,
+.img-b6-1, .img-b6-2, .img-b6-3 {
+  width: 100%;
+  height: auto;
+  max-height: 300px;
+  object-fit: cover;
 }
 
 /* ================= THEME ICON ================= */
@@ -165,6 +183,7 @@ body{
   pointer-events:none;
   transition:.4s;
   box-shadow:0 8px 25px rgba(0,0,0,.15);
+  z-index: 999;
 }
 #scrollTop.show{
   opacity:1;
@@ -270,6 +289,9 @@ p, div, span {
   border-radius: 8px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.1);
   transition: transform 0.3s;
+  width: 100%;
+  height: auto;
+  max-height: 300px;
 }
 
 .resim-1:hover, .resim-2:hover, .resim-3:hover, .resim-4:hover, .resim-5:hover, .resim-6:hover {
@@ -301,6 +323,7 @@ body.dark .resim-6 {
   border: none;
   width: 100%;
   transition: background-color 0.4s;
+  margin: 20px 0;
 }
 
 /* Karanlık mod için beyaz çizgi */
@@ -327,6 +350,286 @@ body.dark .custom-line.soft {
   height: 3px;
 }
 
+/* ================= KAYNAKÇA ÖZEL STİLLERİ ================= */
+.kaynakca-list {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.kaynakca-item {
+  margin-bottom: 15px;
+  padding-left: 25px;
+  position: relative;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.kaynakca-item i {
+  position: absolute;
+  left: 0;
+  color: var(--text-color);
+}
+
+.kaynakca-subtitle {
+  font-size: 20px;
+  margin: 25px 0 15px;
+  color: var(--title-color);
+}
+
+/* ================= RESPONSIVE DÜZENLEMELER ================= */
+
+/* Küçük cihazlar (mobil) için */
+@media (max-width: 768px) {
+  /* Topbar */
+  .topbar {
+    padding: 12px 10px;
+  }
+  
+  .title-container {
+    width: 70%;
+    max-width: 300px;
+  }
+  
+  .title-main {
+    font-size: 14px;
+    line-height: 1.1;
+  }
+  
+  .title-sub {
+    font-size: 12px;
+    line-height: 1.1;
+  }
+  
+  /* Menü */
+  #modernMenu a {
+    font-size: 22px;
+    padding: 8px 10px;
+  }
+  
+  .menu-close {
+    top: 15px;
+    right: 20px;
+    font-size: 28px;
+  }
+  
+  /* Sayfa içeriği */
+  .container {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+  
+  .py-5 {
+    padding-top: 2rem !important;
+    padding-bottom: 2rem !important;
+  }
+  
+  /* Başlıklar */
+  h3 {
+    font-size: 24px !important;
+    margin-bottom: 15px !important;
+  }
+  
+  h4 {
+    font-size: 20px !important;
+    margin-bottom: 12px !important;
+  }
+  
+  /* Metinler */
+  .metin-1, .metin-2, .metin-3 {
+    font-size: 16px !important;
+    line-height: 1.6 !important;
+  }
+  
+  /* Görseller */
+  .resim-1, .resim-2, .resim-3, .resim-4, .resim-5, .resim-6 {
+    max-height: 250px;
+    margin-bottom: 15px;
+  }
+  
+  /* Kaynakça özel düzenlemeler */
+  .kaynakca-subtitle {
+    font-size: 18px;
+    margin: 20px 0 12px;
+  }
+  
+  .kaynakca-item {
+    padding-left: 22px;
+    margin-bottom: 12px;
+    font-size: 14px;
+  }
+  
+  /* Footer */
+  footer .row > div {
+    margin-bottom: 15px;
+    text-align: center !important;
+  }
+  
+  footer .col-md-4 {
+    margin-bottom: 15px;
+  }
+  
+  /* Scroll top butonu */
+  #scrollTop {
+    right: 15px;
+    bottom: 80px;
+    width: 40px;
+    height: 40px;
+  }
+}
+
+/* Çok küçük cihazlar için */
+@media (max-width: 576px) {
+  .title-container {
+    width: 65%;
+    max-width: 250px;
+  }
+  
+  .title-main {
+    font-size: 12px;
+  }
+  
+  .title-sub {
+    font-size: 10px;
+  }
+  
+  .topbar img {
+    width: 36px;
+  }
+  
+  #modernMenu a {
+    font-size: 20px;
+  }
+  
+  .kaynakca-link {
+    font-size: 14px;
+    padding: 8px 15px;
+  }
+  
+  /* Görsel alt yazıları */
+  p.mt-2 {
+    font-size: 12px !important;
+  }
+  
+  /* Kaynakça listesi için daha küçük yazı */
+  .kaynakca-item {
+    font-size: 13px;
+  }
+}
+
+/* Orta boy cihazlar (tablet) için */
+@media (min-width: 769px) and (max-width: 992px) {
+  .title-container {
+    width: 55%;
+    max-width: 350px;
+  }
+  
+  .title-main {
+    font-size: 15px;
+  }
+  
+  .title-sub {
+    font-size: 13px;
+  }
+  
+  /* Kaynakça düzenlemeleri */
+  .kaynakca-item {
+    font-size: 15px;
+  }
+}
+
+/* Büyük ekranlar için */
+@media (min-width: 1200px) {
+  .container {
+    max-width: 1140px;
+  }
+  
+  /* Kaynakça için iki sütunlu düzen */
+  #kaynakca .col-12 {
+    column-count: 2;
+    column-gap: 40px;
+  }
+  
+  #kaynakca .col-12 > * {
+    break-inside: avoid;
+  }
+}
+
+/* Yazdırma için düzenlemeler */
+@media print {
+  .topbar, .theme-toggle, #scrollTop, footer, .kaynakca-link {
+    display: none !important;
+  }
+  
+  body {
+    background: white !important;
+    color: black !important;
+  }
+  
+  .page.active {
+    display: block !important;
+    opacity: 1 !important;
+  }
+}
+
+/* Flex düzenlemeleri */
+.flex-column-reverse-mobile {
+  display: flex;
+  flex-direction: column;
+}
+
+@media (max-width: 768px) {
+  .flex-column-reverse-mobile {
+    flex-direction: column-reverse;
+  }
+}
+
+/* Görsel ve metin hizalaması */
+.img-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+/* Bootstrap grid düzenlemeleri */
+.row.align-items-center {
+  align-items: flex-start !important;
+}
+
+@media (max-width: 768px) {
+  .row.align-items-center {
+    margin-bottom: 30px;
+  }
+  
+  .col-md-6 {
+    margin-bottom: 20px;
+  }
+}
+
+/* Metin kutuları için padding */
+.text-content {
+  padding: 15px;
+}
+
+/* Görsel alt yazıları */
+.image-caption {
+  font-size: 14px;
+  text-align: center;
+  opacity: 0.8;
+  margin-top: 8px;
+  margin-bottom: 20px;
+}
+
+/* Kaynakça için responsive düzen */
+.kaynakca-section {
+  margin-bottom: 30px;
+}
+
+@media (max-width: 768px) {
+  .kaynakca-section {
+    margin-bottom: 20px;
+  }
+}
 </style>
 </head>
 
@@ -334,7 +637,7 @@ body.dark .custom-line.soft {
 
 <!-- ================= TOPBAR ================= -->
 <header class="topbar">
-  <img src="images/logo.png" onclick="goHome()">
+  <img src="images/logo.png" onclick="goHome()" alt="Logo">
   <div class="title-container">
     <div class="title-main">Sağlık Hizmetleri Meslek Yüksekokulu</div>
     <div class="title-sub">Terapi ve Rehabilitasyon</div>
@@ -370,37 +673,34 @@ body.dark .custom-line.soft {
 <!-- ================= HOME ================= -->
 <section id="home" class="page active container py-5">
 <!-- GÖRSEL 1 - METİN 1 -->
-<div class="row align-items-center mb-5">
-  <div class="col-md-6">
-
+<div class="row align-items-center mb-5 flex-column-reverse-mobile">
+  <div class="col-md-6 text-content">
     <!-- METİN 1 DÜZENLEME ALANI - BAĞIMSIZ -->
-    <div class="metin-1" style="font-size: 18px; line-height: 1.8;">
-      <h3 style="font-size: 32px; margin-bottom: 15px;">Ana Sayfa Hoş Geldiniz</h3>
+    <div class="metin-1">
+      <h3>Ana Sayfa Hoş Geldiniz</h3>
       <p>Bu çalışmada; gözler kapalı tek ayak üzerinde denge testi, stroop testi, durarak uzun atlama testi, kas kuvvet değerlendirmesi, refleks (cetvel düşürme) testi ve pegboard testi uygulanmıştır. Değerlendirmeye 13–18 yaş aralığında bulunan toplam 587 öğrenci dâhil edilmiştir. Altı testten elde edilen toplam veri sayısı 2.968 olarak belirlenmiştir.</p>
     </div>
   </div>
 
-  <div class="col-md-6">
+  <div class="col-md-6 img-container">
     <!-- GÖRSEL 1 DÜZENLEME ALANI - BAĞIMSIZ -->
-    <img class="resim-1 img-fluid" style="width: 380px; height: 250px;"
-    src="images/veri.png">
-    <p class="mt-2" style="font-size: 14px; text-align: center; opacity: 0.8;">Görsel 1: Test İstatistikleri</p>
+    <img class="resim-1 img-fluid" src="images/veri.png" alt="Test İstatistikleri">
+    <p class="image-caption">Görsel 1: Test İstatistikleri</p>
   </div>
 </div>
 
 <!-- GÖRSEL 2 - METİN 2 -->
 <div class="row align-items-center mb-5">
-  <div class="col-md-6">
+  <div class="col-md-6 img-container">
     <!-- GÖRSEL 2 DÜZENLEME ALANI - BAĞIMSIZ -->
-    <img class="resim-2 img-fluid" style="width: 370px; height: 240px;"
-    src="images/game1.jpg">
-    <p class="mt-2" style="font-size: 14px; text-align: center; opacity: 0.8;">Görsel 2: Stroop Testi</p>
+    <img class="resim-2 img-fluid" src="images/game1.jpg" alt="Stroop Testi">
+    <p class="image-caption">Görsel 2: Stroop Testi</p>
   </div>
 
-  <div class="col-md-6">
+  <div class="col-md-6 text-content">
     <!-- METİN 2 DÜZENLEME ALANI - BAĞIMSIZ -->
-    <div class="metin-2" style="font-size: 17px; line-height: 1.7;">
-      <h4 style="font-size: 28px; margin-bottom: 12px;">Fiziksel ve Bilişsel-Motor Performans</h4>
+    <div class="metin-2">
+      <h4>Fiziksel ve Bilişsel-Motor Performans</h4>
       <p>Bu çalışmada lise öğrencilerinin denge, dikkat, patlayıcı kuvvet, kas kuvveti, reaksiyon hızı ve ince motor becerileri Alpha test bataryası standartlarına uygun olarak değerlendirilmiştir.</p>
       <p>Gözler kapalı tek ayak denge testi, Stroop testi, durarak uzun atlama, kas kuvvet değerlendirmesi, cetvel düşürme refleks testi ve pegboard testi uygulanarak öğrencilerin fiziksel ve bilişsel-motor performansları hızlı ve güvenilir şekilde belirlenmiştir.</p>
     </div>
@@ -408,21 +708,20 @@ body.dark .custom-line.soft {
 </div>
 
 <!-- GÖRSEL 3 - METİN 3 -->
-<div class="row align-items-center">
-  <div class="col-md-6">
+<div class="row align-items-center flex-column-reverse-mobile">
+  <div class="col-md-6 text-content">
     <!-- METİN 3 DÜZENLEME ALANI - BAĞIMSIZ -->
-    <div class="metin-3" style="font-size: 16px; line-height: 1.9;">
-      <h4 style="font-size: 26px; margin-bottom: 10px;">Motor ve Bilişsel İşlev Ölçümü</h4>
+    <div class="metin-3">
+      <h4>Motor ve Bilişsel İşlev Ölçümü</h4>
       <p>Uygulanan testler, öğrencilerin temel motor ve bilişsel işlevlerini kısa sürede ve objektif olarak ölçmeyi amaçlamaktadır.</p>
       <p>Alpha test yaklaşımına uygun bu batarya, denge, dikkat, kuvvet, reaksiyon ve ince motor koordinasyon alanlarında çok yönlü performans profilinin elde edilmesini sağlamıştır.</p>
     </div>
   </div>
 
-  <div class="col-md-6">
+  <div class="col-md-6 img-container">
     <!-- GÖRSEL 3 DÜZENLEME ALANI - BAĞIMSIZ -->
-    <img class="resim-3 img-fluid" style="width: 390px; height: 260px;"
-    src="images/peg-anasayfa.jpg">
-    <p class="mt-2" style="font-size: 14px; text-align: center; opacity: 0.8;">Görsel 3: Pegboard Testi</p>
+    <img class="resim-3 img-fluid" src="images/peg-anasayfa.jpg" alt="Pegboard Testi">
+    <p class="image-caption">Görsel 3: Pegboard Testi</p>
   </div>
 </div>
 
@@ -437,40 +736,35 @@ body.dark .custom-line.soft {
 <!-- ================= BÖLÜM 1 ================= -->
 <section id="b1" class="page container py-5">
 <!-- GÖRSEL 1 - METİN 1 -->
-<div class="row align-items-center mb-5">
-  <div class="col-md-6">
-
+<div class="row align-items-center mb-5 flex-column-reverse-mobile">
+  <div class="col-md-6 text-content">
     <!-- METİN 1 - BAĞIMSIZ -->
-    <div class="metin-1" style="font-size: 19px; line-height: 1.7;">
-      <h3 style="font-size: 34px; margin-bottom: 18px;">Bölüm 1: Denge Testi</h3>
-      <h4 style="font-size: 26px; margin-bottom: 18px;">Neden Yapıldı ?</h4>
-
+    <div class="metin-1">
+      <h3>Bölüm 1: Denge Testi</h3>
+      <h4>Neden Yapıldı ?</h4>
       <p>Bu test, bireyin tek ayak üzerinde gözleri kapalı durarak denge kontrolünü ölçer. Dengeyi güçlendirmek ve düşme riskini azaltmak için kullanılır. Vücut farkındalığı ve postür kontrolünü geliştirmeye yardımcı olur.</p>
       <p>Spor performansı ve günlük aktivitelerde güvenliği artırır. Düzenli uygulamalar, denge kaybını önleyebilir.</p>
-      
     </div>
   </div>
-  <div class="col-md-6">
+  <div class="col-md-6 img-container">
     <!-- GÖRSEL 1 DÜZENLEME ALANI - BAĞIMSIZ -->
-    <img class="resim-1 img-fluid" style="width: 365px; height: 245px;"
-    src="images/denge-1.jpeg">
-    <p class="mt-2" style="font-size: 14px; text-align: center; opacity: 0.8;">Görsel 1: Denge Testi</p>
+    <img class="resim-1 img-fluid" src="images/denge-1.jpeg" alt="Denge Testi">
+    <p class="image-caption">Görsel 1: Denge Testi</p>
   </div>
 </div>
 
 <!-- GÖRSEL 2 - METİN 2 -->
 <div class="row align-items-center mb-5">
-  <div class="col-md-6">
+  <div class="col-md-6 img-container">
     <!-- GÖRSEL 2 DÜZENLEME ALANI - BAĞIMSIZ -->
-    <img class="resim-2 img-fluid" style="width: 355px; height: 235px;"
-    src="images/denge-2.jpg">
-    <p class="mt-2" style="font-size: 14px; text-align: center; opacity: 0.8;">Görsel 2: Denge Testi</p>
+    <img class="resim-2 img-fluid" src="images/denge-2.jpg" alt="Denge Testi">
+    <p class="image-caption">Görsel 2: Denge Testi</p>
   </div>
 
-  <div class="col-md-6">
+  <div class="col-md-6 text-content">
     <!-- METİN 2 DÜZENLEME ALANI - BAĞIMSIZ -->
-    <div class="metin-2" style="font-size: 17px; line-height: 1.8;">
-      <h4 style="font-size: 28px; margin-bottom: 14px;">Önemi</h4>
+    <div class="metin-2">
+      <h4>Önemi</h4>
       <p>Denge yeteneği, hem fiziksel sağlık hem de günlük yaşam aktiviteleri için kritik öneme sahiptir.</p>
       <p>İyi bir denge, yaralanma riskini azaltır. Sporcuların performansını artırır ve koordinasyonu destekler. Aynı zamanda motor kontrolün genel göstergesidir.</p>
     </div>
@@ -478,21 +772,20 @@ body.dark .custom-line.soft {
 </div>
 
 <!-- GÖRSEL 3 - METİN 3 -->
-<div class="row align-items-center">
-  <div class="col-md-6">
+<div class="row align-items-center flex-column-reverse-mobile">
+  <div class="col-md-6 text-content">
     <!-- METİN 3 DÜZENLEME ALANI - BAĞIMSIZ -->
-    <div class="metin-3" style="font-size: 18px; line-height: 1.6;">
-      <h4 style="font-size: 26px; margin-bottom: 12px;">13-18 Yaş Bireylere Yapılma Nedeni</h4>
+    <div class="metin-3">
+      <h4>13-18 Yaş Bireylere Yapılma Nedeni</h4>
       <p>Ergenlik döneminde hızlı büyüme ve vücut oranlarındaki değişiklikler dengeyi etkileyebilir. Bu yaş grubunda denge gelişimini takip etmek önemlidir.</p>
       <p>Fiziksel aktivitelerde ve sporda güvenli hareket etmelerini sağlar. Ayrıca motor koordinasyon gelişimi için değerli bilgiler verir.</p>
     </div>
   </div>
 
-  <div class="col-md-6">
+  <div class="col-md-6 img-container">
     <!-- GÖRSEL 3 DÜZENLEME ALANI - BAĞIMSIZ -->
-    <img class="resim-3 img-fluid" style="width: 375px; height: 255px;"
-    src="images/denge-3.jpg">
-    <p class="mt-2" style="font-size: 14px; text-align: center; opacity: 0.8;">Görsel 3: Denge Testi</p>
+    <img class="resim-3 img-fluid" src="images/denge-3.jpg" alt="Denge Testi">
+    <p class="image-caption">Görsel 3: Denge Testi</p>
   </div>
 </div>
 
@@ -507,39 +800,36 @@ body.dark .custom-line.soft {
 <!-- ================= BÖLÜM 2 ================= -->
 <section id="b2" class="page container py-5">
 <!-- GÖRSEL 1 - METİN 1 -->
-<div class="row align-items-center mb-5">
-  <div class="col-md-6">
+<div class="row align-items-center mb-5 flex-column-reverse-mobile">
+  <div class="col-md-6 text-content">
     <!-- METİN 1 DÜZENLEME ALANI - BAĞIMSIZ -->
-    <div class="metin-1" style="font-size: 18px; line-height: 1.8;">
-      <h3 style="font-size: 32px; margin-bottom: 16px;">Bölüm 2: Stroop Testi</h3>
-            <h4 style="font-size: 26px; margin-bottom: 18px;">Neden Yapıldı ?</h4>
-
+    <div class="metin-1">
+      <h3>Bölüm 2: Stroop Testi</h3>
+      <h4>Neden Yapıldı ?</h4>
       <p>Stroop testi, dikkat, bilişsel kontrol ve tepki sürelerini ölçmek için uygulanır. Beynin bilgiyi işleme hızını ve dikkat odaklanmasını değerlendirir. Zihinsel esneklik ve konsantrasyon becerilerini geliştirmeye yardımcı olur.</p>
       <p>Öğrenme süreçlerinde ve problem çözme yeteneğinde performansı izler. Beyin fonksiyonlarının genel sağlığını kontrol etmek için faydalıdır.</p>
     </div>
   </div>
 
-  <div class="col-md-6">
+  <div class="col-md-6 img-container">
     <!-- GÖRSEL 1 DÜZENLEME ALANI - BAĞIMSIZ -->
-    <img class="resim-1 img-fluid" style="width: 370px; height: 250px;"
-    src="images/stroop-1.jpg">
-    <p class="mt-2" style="font-size: 14px; text-align: center; opacity: 0.8;">Görsel 1: Stroop Testi</p>
+    <img class="resim-1 img-fluid" src="images/stroop-1.jpg" alt="Stroop Testi">
+    <p class="image-caption">Görsel 1: Stroop Testi</p>
   </div>
 </div>
 
 <!-- GÖRSEL 2 - METİN 2 -->
 <div class="row align-items-center mb-5">
-  <div class="col-md-6">
+  <div class="col-md-6 img-container">
     <!-- GÖRSEL 2 DÜZENLEME ALANI - BAĞIMSIZ -->
-    <img class="resim-2 img-fluid" style="width: 360px; height: 240px;"
-    src="images/stroop-2.jpeg">
-    <p class="mt-2" style="font-size: 14px; text-align: center; opacity: 0.8;">Görsel 2: Stroop Testi</p>
+    <img class="resim-2 img-fluid" src="images/stroop-2.jpeg" alt="Stroop Testi">
+    <p class="image-caption">Görsel 2: Stroop Testi</p>
   </div>
 
-  <div class="col-md-6">
+  <div class="col-md-6 text-content">
     <!-- METİN 2 DÜZENLEME ALANI - BAĞIMSIZ -->
-    <div class="metin-2" style="font-size: 17px; line-height: 1.7;">
-      <h4 style="font-size: 28px; margin-bottom: 14px;">Önemi</h4>
+    <div class="metin-2">
+      <h4>Önemi</h4>
       <p>Dikkat ve bilişsel kontrol, akademik başarı ve günlük yaşam aktiviteleri için önemlidir. Hızlı ve doğru karar verme yeteneğini artırır.</p>
       <p>Konsantrasyon eksikliği veya bilişsel gecikmeleri tespit etmeye yardımcı olur. Beynin bilgi işleme kapasitesinin göstergesidir.</p>
     </div>
@@ -547,22 +837,20 @@ body.dark .custom-line.soft {
 </div>
 
 <!-- GÖRSEL 3 - METİN 3 -->
-<div class="row align-items-center">
-  <div class="col-md-6">
-
+<div class="row align-items-center flex-column-reverse-mobile">
+  <div class="col-md-6 text-content">
     <!-- METİN 3 DÜZENLEME ALANI - BAĞIMSIZ -->
-    <div class="metin-3" style="font-size: 16px; line-height: 1.9;">
-      <h4 style="font-size: 26px; margin-bottom: 12px;">13-18 Yaş Bireylere Yapılma Nedeni</h4>
+    <div class="metin-3">
+      <h4>13-18 Yaş Bireylere Yapılma Nedeni</h4>
       <p>Ergenlikte bilişsel kontrol ve dikkat becerileri hızla gelişir. Bu test, ergenlerin dikkat ve tepki sürelerini izlemek için uygundur.</p>
       <p>Akademik performans ve spor gibi aktivitelerde dikkati optimize etmeye yardımcı olur. Zihinsel gelişimi takip etmek ve olası bilişsel sorunları erken fark etmek için kullanılır.</p>
     </div>
   </div>
 
-  <div class="col-md-6">
+  <div class="col-md-6 img-container">
     <!-- GÖRSEL 3 DÜZENLEME ALANI - BAĞIMSIZ -->
-    <img class="resim-3 img-fluid" style="width: 380px; height: 260px;"
-    src="images/stroop-3.png">
-    <p class="mt-2" style="font-size: 14px; text-align: center; opacity: 0.8;">Görsel 3: Stroop Testi</p>
+    <img class="resim-3 img-fluid" src="images/stroop-3.png" alt="Stroop Testi">
+    <p class="image-caption">Görsel 3: Stroop Testi</p>
   </div>
 </div>
 
@@ -576,42 +864,37 @@ body.dark .custom-line.soft {
 
 <!-- ================= BÖLÜM 3 ================= -->
 <section id="b3" class="page container py-5">
-
 <!-- GÖRSEL 1 - METİN 1 -->
-<div class="row align-items-center mb-5">
-  <div class="col-md-6">
-
+<div class="row align-items-center mb-5 flex-column-reverse-mobile">
+  <div class="col-md-6 text-content">
     <!-- METİN 1 DÜZENLEME ALANI - BAĞIMSIZ -->
-    <div class="metin-1" style="font-size: 20px; line-height: 1.7;">
-      <h3 style="font-size: 36px; margin-bottom: 20px;">Bölüm 3: Refleks Testi</h3>
-                  <h4 style="font-size: 26px; margin-bottom: 18px;">Neden Yapıldı ?</h4>
-
+    <div class="metin-1">
+      <h3>Bölüm 3: Refleks Testi</h3>
+      <h4>Neden Yapıldı ?</h4>
       <p>Refleks testi, tepki süresini ve sinir sistemi hızını ölçer. Beynin motor yanıtlarını değerlendirmek için kullanılır.</p>
       <p>Hızlı refleksler, günlük yaşamda ve sporda güvenliği artırır. Düzenli test, sinir sistemi gelişimini takip etmeye yardımcı olur. Motor kontrol ve koordinasyon ile ilgili bilgi verir.</p>
     </div>
   </div>
 
-  <div class="col-md-6">
+  <div class="col-md-6 img-container">
     <!-- GÖRSEL 1 DÜZENLEME ALANI - BAĞIMSIZ -->
-    <img class="resim-1 img-fluid" style="width: 375px; height: 255px;"
-    src="images/reaksiyon-1.jpeg">
-    <p class="mt-2" style="font-size: 14px; text-align: center; opacity: 0.8;">Görsel 1: Refleks Testi</p>
+    <img class="resim-1 img-fluid" src="images/reaksiyon-1.jpeg" alt="Refleks Testi">
+    <p class="image-caption">Görsel 1: Refleks Testi</p>
   </div>
 </div>
 
 <!-- GÖRSEL 2 - METİN 2 -->
 <div class="row align-items-center mb-5">
-  <div class="col-md-6">
+  <div class="col-md-6 img-container">
     <!-- GÖRSEL 2 DÜZENLEME ALANI - BAĞIMSIZ -->
-    <img class="resim-2 img-fluid" style="width: 365px; height: 245px;"
-    src="images/reaksiyon-2.jpg">
-    <p class="mt-2" style="font-size: 14px; text-align: center; opacity: 0.8;">Görsel 2: Refleks Testi</p>
+    <img class="resim-2 img-fluid" src="images/reaksiyon-2.jpg" alt="Refleks Testi">
+    <p class="image-caption">Görsel 2: Refleks Testi</p>
   </div>
 
-  <div class="col-md-6">
+  <div class="col-md-6 text-content">
     <!-- METİN 2 DÜZENLEME ALANI - BAĞIMSIZ -->
-    <div class="metin-2" style="font-size: 18px; line-height: 1.6;">
-      <h4 style="font-size: 30px; margin-bottom: 16px;">Önemi</h4>
+    <div class="metin-2">
+      <h4>Önemi</h4>
       <p>Refleks hızı, motor kontrol ve koordinasyonun göstergesidir. Spor ve fiziksel aktivitelerde güvenliği artırır.</p>
       <p>Tepki süresi yavaşsa, önlem almak mümkündür. Reflekslerin güçlü olması, hızlı hareket ve karar vermeyi sağlar.</p>
     </div>
@@ -619,21 +902,20 @@ body.dark .custom-line.soft {
 </div>
 
 <!-- GÖRSEL 3 - METİN 3 -->
-<div class="row align-items-center">
-  <div class="col-md-6">
+<div class="row align-items-center flex-column-reverse-mobile">
+  <div class="col-md-6 text-content">
     <!-- METİN 3 DÜZENLEME ALANI - BAĞIMSIZ -->
-    <div class="metin-3" style="font-size: 19px; line-height: 1.8;">
-      <h4 style="font-size: 28px; margin-bottom: 14px;">13-18 Yaş Bireylere Yapılma Nedeni</h4>
+    <div class="metin-3">
+      <h4>13-18 Yaş Bireylere Yapılma Nedeni</h4>
       <p>Ergenlikte sinir sistemi ve koordinasyon gelişimi devam eder. Bu test, refleks gelişimini izlemek için uygundur. Spor ve fiziksel aktivitelerde performans ve güvenliği optimize eder.</p>
       <p>Erken yaşta gelişim takibi, uzun vadeli motor yetenekler için faydalıdır.</p>
     </div>
   </div>
 
-  <div class="col-md-6">
+  <div class="col-md-6 img-container">
     <!-- GÖRSEL 3 DÜZENLEME ALANI - BAĞIMSIZ -->
-    <img class="resim-3 img-fluid" style="width: 385px; height: 265px;"
-    src="images/reaksiyon-3.jpg">
-    <p class="mt-2" style="font-size: 14px; text-align: center; opacity: 0.8;">Görsel 3: Refleks Testi</p>
+    <img class="resim-3 img-fluid" src="images/reaksiyon-3.jpg" alt="Refleks Testi">
+    <p class="image-caption">Görsel 3: Refleks Testi</p>
   </div>
 </div>
 
@@ -647,41 +929,37 @@ body.dark .custom-line.soft {
 
 <!-- ================= BÖLÜM 4 ================= -->
 <section id="b4" class="page container py-5">
-
 <!-- GÖRSEL 1 - METİN 1 -->
-<div class="row align-items-center mb-5">
-  <div class="col-md-6">
+<div class="row align-items-center mb-5 flex-column-reverse-mobile">
+  <div class="col-md-6 text-content">
     <!-- METİN 1 DÜZENLEME ALANI - BAĞIMSIZ -->
-    <div class="metin-1" style="font-size: 21px; line-height: 1.7;">
-      <h3 style="font-size: 38px; margin-bottom: 22px;">Bölüm 4: Pegboard Testi</h3>
-                        <h4 style="font-size: 26px; margin-bottom: 18px;">Neden Yapıldı ?</h4>
-
+    <div class="metin-1">
+      <h3>Bölüm 4: Pegboard Testi</h3>
+      <h4>Neden Yapıldı ?</h4>
       <p>Pegboard testi, el-göz koordinasyonu ve ince motor becerilerini ölçer. Dikkat ve el becerisini geliştirmeye yardımcı olur. El kaslarının kontrolünü ve hızını değerlendirir. Düzenli uygulama, motor beceri gelişimini destekler.</p>
       <p>Öğrenme ve günlük aktivitelerde beceri kazanımını artırır.</p>
     </div>
   </div>
 
-  <div class="col-md-6">
+  <div class="col-md-6 img-container">
     <!-- GÖRSEL 1 DÜZENLEME ALANI - BAĞIMSIZ -->
-    <img class="resim-1 img-fluid" style="width: 380px; height: 260px;"
-    src="images/pegboard-1.jpg">
-    <p class="mt-2" style="font-size: 14px; text-align: center; opacity: 0.8;">Görsel 1: Pegboard Testi</p>
+    <img class="resim-1 img-fluid" src="images/pegboard-1.jpg" alt="Pegboard Testi">
+    <p class="image-caption">Görsel 1: Pegboard Testi</p>
   </div>
 </div>
 
 <!-- GÖRSEL 2 - METİN 2 -->
 <div class="row align-items-center mb-5">
-  <div class="col-md-6">
+  <div class="col-md-6 img-container">
     <!-- GÖRSEL 2 DÜZENLEME ALANI - BAĞIMSIZ -->
-    <img class="resim-2 img-fluid" style="width: 370px; height: 250px;"
-    src="images/pegboard-2.jpeg">
-    <p class="mt-2" style="font-size: 14px; text-align: center; opacity: 0.8;">Görsel 2: Pegboard Testi</p>
+    <img class="resim-2 img-fluid" src="images/pegboard-2.jpeg" alt="Pegboard Testi">
+    <p class="image-caption">Görsel 2: Pegboard Testi</p>
   </div>
 
-  <div class="col-md-6">
+  <div class="col-md-6 text-content">
     <!-- METİN 2 DÜZENLEME ALANI - BAĞIMSIZ -->
-    <div class="metin-2" style="font-size: 18px; line-height: 1.6;">
-      <h4 style="font-size: 32px; margin-bottom: 18px;">Önemi</h4>
+    <div class="metin-2">
+      <h4>Önemi</h4>
       <p>İnce motor beceriler, yazı yazma, spor ve günlük işlerde başarı için önemlidir. Koordinasyon ve el becerisi, akademik ve fiziksel performansı etkiler.</p>
       <p>Pegboard testi, motor gelişimin güvenilir göstergesidir. Hız ve doğruluk becerilerini bir arada değerlendirir.</p>
     </div>
@@ -689,21 +967,20 @@ body.dark .custom-line.soft {
 </div>
 
 <!-- GÖRSEL 3 - METİN 3 -->
-<div class="row align-items-center">
-  <div class="col-md-6">
+<div class="row align-items-center flex-column-reverse-mobile">
+  <div class="col-md-6 text-content">
     <!-- METİN 3 DÜZENLEME ALANI - BAĞIMSIZ -->
-    <div class="metin-3" style="font-size: 17px; line-height: 1.8;">
-      <h4 style="font-size: 28px; margin-bottom: 14px;">13-18 Yaş Bireylere Yapılma Nedeni</h4>
+    <div class="metin-3">
+      <h4>13-18 Yaş Bireylere Yapılma Nedeni</h4>
       <p>Ergenlikte ince motor beceriler hala gelişmektedir. Bu test, el-göz koordinasyonu ve beceri gelişimini izlemek için uygundur. Eğitimde ve spor aktivitelerinde performansı artırmak için kullanılır.</p>
       <p>Motor gelişimdeki eksiklikleri erken fark etmek için faydalıdır.</p>
     </div>
   </div>
 
-  <div class="col-md-6">
+  <div class="col-md-6 img-container">
     <!-- GÖRSEL 3 DÜZENLEME ALANI - BAĞIMSIZ -->
-    <img class="resim-3 img-fluid" style="width: 390px; height: 270px;"
-    src="images/pegboard-3.jpg">
-    <p class="mt-2" style="font-size: 14px; text-align: center; opacity: 0.8;">Görsel 3: Pegboard Testi</p>
+    <img class="resim-3 img-fluid" src="images/pegboard-3.jpg" alt="Pegboard Testi">
+    <p class="image-caption">Görsel 3: Pegboard Testi</p>
   </div>
 </div>
 
@@ -717,41 +994,37 @@ body.dark .custom-line.soft {
 
 <!-- ================= BÖLÜM 5 ================= -->
 <section id="b5" class="page container py-5">
-
 <!-- GÖRSEL 1 - METİN 1 -->
-<div class="row align-items-center mb-5">
-  <div class="col-md-6">
+<div class="row align-items-center mb-5 flex-column-reverse-mobile">
+  <div class="col-md-6 text-content">
     <!-- METİN 1 DÜZENLEME ALANI - BAĞIMSIZ -->
-    <div class="metin-1" style="font-size: 19px; line-height: 1.7;">
-      <h3 style="font-size: 34px; margin-bottom: 18px;">Bölüm 5: Kas Kuvvet Değerlendirme Testi</h3>
-            <h4 style="font-size: 26px; margin-bottom: 18px;">Neden Yapıldı ?</h4>
-
+    <div class="metin-1">
+      <h3>Bölüm 5: Kas Kuvvet Değerlendirme Testi</h3>
+      <h4>Neden Yapıldı ?</h4>
       <p>Kas kuvvet testi, kasların dayanıklılığını ve gücünü ölçmek için yapılır. Fiziksel gelişimi takip etmek ve spor performansını değerlendirmek için faydalıdır. Güçlü kaslar, hareket verimliliğini artırır ve yaralanmaları önler.</p>
       <p>Test, kas dengesizliklerini belirlemeye yardımcı olur. Düzenli değerlendirme, egzersiz planlamasında rehberlik sağlar.</p>
     </div>
   </div>
 
-  <div class="col-md-6">
+  <div class="col-md-6 img-container">
     <!-- GÖRSEL 1 DÜZENLEME ALANI - BAĞIMSIZ -->
-    <img class="resim-1 img-fluid" style="width: 375px; height: 255px;"
-    src="images/kuvvet1.jpeg">
-    <p class="mt-2" style="font-size: 14px; text-align: center; opacity: 0.8;">Görsel 1: Kas Kuvvet Değerlendirmesi</p>
+    <img class="resim-1 img-fluid" src="images/kuvvet1.jpeg" alt="Kas Kuvvet Değerlendirmesi">
+    <p class="image-caption">Görsel 1: Kas Kuvvet Değerlendirmesi</p>
   </div>
 </div>
 
 <!-- GÖRSEL 2 - METİN 2 -->
 <div class="row align-items-center mb-5">
-  <div class="col-md-6">
+  <div class="col-md-6 img-container">
     <!-- GÖRSEL 2 DÜZENLEME ALANI - BAĞIMSIZ -->
-    <img class="resim-2 img-fluid" style="width: 365px; height: 245px;"
-    src="images/kuvvet2.jpg">
-    <p class="mt-2" style="font-size: 14px; text-align: center; opacity: 0.8;">Görsel 2: Kas Kuvvet Değerlendirmesi</p>
+    <img class="resim-2 img-fluid" src="images/kuvvet2.jpg" alt="Kas Kuvvet Değerlendirmesi">
+    <p class="image-caption">Görsel 2: Kas Kuvvet Değerlendirmesi</p>
   </div>
 
-  <div class="col-md-6">
+  <div class="col-md-6 text-content">
     <!-- METİN 2 DÜZENLEME ALANI - BAĞIMSIZ -->
-    <div class="metin-2" style="font-size: 17px; line-height: 1.8;">
-      <h4 style="font-size: 28px; margin-bottom: 14px;">Önemi</h4>
+    <div class="metin-2">
+      <h4>Önemi</h4>
       <p>Kas kuvveti, günlük aktivitelerde verimlilik ve güvenlik için önemlidir. Spor ve fiziksel aktivitelerde performansı artırır. Kas dengesizlikleri ve zayıflıkları tespit etmek için bir göstergedir.</p>
       <p>Genel fiziksel sağlık ve esneklik ile doğrudan ilişkilidir.</p>
     </div>
@@ -759,22 +1032,20 @@ body.dark .custom-line.soft {
 </div>
 
 <!-- GÖRSEL 3 - METİN 3 -->
-
-<div class="row align-items-center">
-  <div class="col-md-6">
+<div class="row align-items-center flex-column-reverse-mobile">
+  <div class="col-md-6 text-content">
     <!-- METİN 3 DÜZENLEME ALANI - BAĞIMSIZ -->
-    <div class="metin-3" style="font-size: 16px; line-height: 1.9;">
-      <h4 style="font-size: 26px; margin-bottom: 12px;">13-18 Yaş Bireylere Yapılma Nedeni</h4>
+    <div class="metin-3">
+      <h4>13-18 Yaş Bireylere Yapılma Nedeni</h4>
       <p>Ergenlikte kas gelişimi hızla değişir ve takip edilmelidir. Kas kuvvetini izlemek, güvenli spor ve fiziksel aktivite için gereklidir. Büyüme dönemindeki kas dengesizliklerini önceden tespit eder.</p>
       <p>Gelişim sürecine uygun egzersiz planlamasına yardımcı olur.</p>
     </div>
   </div>
 
-  <div class="col-md-6">
+  <div class="col-md-6 img-container">
     <!-- GÖRSEL 3 DÜZENLEME ALANI - BAĞIMSIZ -->
-    <img class="resim-3 img-fluid" style="width: 385px; height: 265px;"
-    src="images/kuvvet3.jpg">
-    <p class="mt-2" style="font-size: 14px; text-align: center; opacity: 0.8;">Görsel 3: Kas Kuvvet Değerlendirmesi</p>
+    <img class="resim-3 img-fluid" src="images/kuvvet3.jpg" alt="Kas Kuvvet Değerlendirmesi">
+    <p class="image-caption">Görsel 3: Kas Kuvvet Değerlendirmesi</p>
   </div>
 </div>
 
@@ -788,41 +1059,37 @@ body.dark .custom-line.soft {
 
 <!-- ================= BÖLÜM 6 ================= -->
 <section id="b6" class="page container py-5">
-
 <!-- GÖRSEL 1 - METİN 1 -->
-<div class="row align-items-center mb-5">
-  <div class="col-md-6">
+<div class="row align-items-center mb-5 flex-column-reverse-mobile">
+  <div class="col-md-6 text-content">
     <!-- METİN 1 DÜZENLEME ALANI - BAĞIMSIZ -->
-    <div class="metin-1" style="font-size: 20px; line-height: 1.7;">
-      <h3 style="font-size: 36px; margin-bottom: 20px;">Bölüm 6: Durarak Uzun Atlama Testi</h3>
-                  <h4 style="font-size: 26px; margin-bottom: 18px;">Neden Yapıldı ?</h4>
-
+    <div class="metin-1">
+      <h3>Bölüm 6: Durarak Uzun Atlama Testi</h3>
+      <h4>Neden Yapıldı ?</h4>
       <p>Durarak uzun atlama testi, bacak kaslarının gücünü ve patlayıcı kuvvetini ölçer. Spor performansını değerlendirmek ve kas gelişimini takip etmek için faydalıdır. Kas koordinasyonunu ve alt ekstremite dayanıklılığını artırır.</p>
       <p>Düzenli ölçümler, performans gelişimini izlemeyi sağlar. Yaralanmaları önlemeye yardımcı olur.</p>
     </div>
   </div>
 
-  <div class="col-md-6">
+  <div class="col-md-6 img-container">
     <!-- GÖRSEL 1 DÜZENLEME ALANI - BAĞIMSIZ -->
-    <img class="resim-1 img-fluid" style="width: 380px; height: 260px;"
-    src="images/dua1.jpg">
-    <p class="mt-2" style="font-size: 14px; text-align: center; opacity: 0.8;">Görsel 1: Durarak Uzun Atlama</p>
+    <img class="resim-1 img-fluid" src="images/dua1.jpg" alt="Durarak Uzun Atlama">
+    <p class="image-caption">Görsel 1: Durarak Uzun Atlama</p>
   </div>
 </div>
 
 <!-- GÖRSEL 2 - METİN 2 -->
 <div class="row align-items-center mb-5">
-  <div class="col-md-6">
+  <div class="col-md-6 img-container">
     <!-- GÖRSEL 2 DÜZENLEME ALANI - BAĞIMSIZ -->
-    <img class="resim-2 img-fluid" style="width: 370px; height: 250px;"
-    src="images/dua2.jpeg">
-    <p class="mt-2" style="font-size: 14px; text-align: center; opacity: 0.8;">Görsel 2:  Durarak Uzun Atlama</p>
+    <img class="resim-2 img-fluid" src="images/dua2.jpeg" alt="Durarak Uzun Atlama">
+    <p class="image-caption">Görsel 2: Durarak Uzun Atlama</p>
   </div>
 
-  <div class="col-md-6">
+  <div class="col-md-6 text-content">
     <!-- METİN 2 DÜZENLEME ALANI - BAĞIMSIZ -->
-    <div class="metin-2" style="font-size: 18px; line-height: 1.6;">
-      <h4 style="font-size: 30px; margin-bottom: 16px;">Önemi</h4>
+    <div class="metin-2">
+      <h4>Önemi</h4>
       <p>Kas gücü ve patlayıcı kuvvet, fiziksel performans ve hareket verimliliği için önemlidir. Sporcuların atletik yeteneklerini artırır. Kas dengesizliklerini tespit etmeye yardımcı olur.</p>
       <p>Günlük yaşam aktivitelerinde güç ve hız sağlar.</p>
     </div>
@@ -830,21 +1097,20 @@ body.dark .custom-line.soft {
 </div>
 
 <!-- GÖRSEL 3 - METİN 3 -->
-<div class="row align-items-center">
-  <div class="col-md-6">
+<div class="row align-items-center flex-column-reverse-mobile">
+  <div class="col-md-6 text-content">
     <!-- METİN 3 DÜZENLEME ALANI - BAĞIMSIZ -->
-    <div class="metin-3" style="font-size: 19px; line-height: 1.8;">
-      <h4 style="font-size: 28px; margin-bottom: 14px;">13-18 Yaş Bireylere Yapılma Nedeni</h4>
+    <div class="metin-3">
+      <h4>13-18 Yaş Bireylere Yapılma Nedeni</h4>
       <p>Ergenlikte kas gelişimi hızlıdır ve koordinasyon değişir. Bu yaş grubunda kuvvet ve patlayıcı güç gelişimini izlemek önemlidir. Fiziksel aktivite ve spor performansı için referans sağlar.</p>
       <p>Kas dengesizliklerini erken fark etmek, sakatlanma riskini azaltır.</p>
     </div>
   </div>
 
-  <div class="col-md-6">
+  <div class="col-md-6 img-container">
     <!-- GÖRSEL 3 DÜZENLEME ALANI - BAĞIMSIZ -->
-    <img class="resim-3 img-fluid" style="width: 390px; height: 270px;"
-    src="images/dua3.png">
-    <p class="mt-2" style="font-size: 14px; text-align: center; opacity: 0.8;">Görsel 3:  Durarak Uzun Atlama</p>
+    <img class="resim-3 img-fluid" src="images/dua3.png" alt="Durarak Uzun Atlama">
+    <p class="image-caption">Görsel 3: Durarak Uzun Atlama</p>
   </div>
 </div>
 
@@ -1255,25 +1521,24 @@ http://www.kidssportsacademy.com/?pnum=19&pt=Durarak+Uzun+Atlama+Testi
 
 <!-- ================= FOOTER ================= -->
 <footer>
-
- <div class="container">
-<div class="row align-items-center text-center text-md-start">
-  <div class="col-md-4 d-flex align-items-center">
-    <img src="images/logo.png" width="50" class="me-2">
-    <a href="https://www.osmaniye.edu.tr/trb" target="_blank" style="color: white; text-decoration: none; font-size: 18px;">
-      www.osmaniye.edu.tr/trb
-    </a>
+  <div class="container">
+    <div class="row align-items-center text-center text-md-start">
+      <div class="col-md-4 d-flex align-items-center justify-content-center justify-content-md-start mb-3 mb-md-0">
+        <img src="images/logo.png" width="50" class="me-2" alt="Logo">
+        <a href="https://www.osmaniye.edu.tr/trb" target="_blank" style="color: white; text-decoration: none; font-size: 16px;">
+          www.osmaniye.edu.tr/trb
+        </a>
+      </div>
+      <div class="col-md-4 text-center mb-3 mb-md-0">
+        Fizyoterapi Programı
+      </div>
+      <div class="col-md-4 text-center text-md-end">
+        <a href="https://instagram.com/oku.shmyo" target="_blank" style="color: white; text-decoration: none;">
+          <i class="bi bi-instagram"></i> oku.shmyo
+        </a>
+      </div>
+    </div>
   </div>
-  <div class="col-md-4 text-center">
-    Fizyoterapi Programı
-  </div>
-  <div class="col-md-4 text-md-end">
-    <a href="https://instagram.com/oku.shmyo" target="_blank" style="color: white; text-decoration: none;">
-      <i class="bi bi-instagram"></i> oku.shmyo
-    </a>
-  </div>
-</div>
-
 </footer>
 
 <!-- ================= JS ================= -->
